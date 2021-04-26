@@ -197,3 +197,18 @@ class TestExamples(unittest.TestCase):
         simulator.schedule(55, abc.something, "ABCDEF")
         simulator.run()
         simulator.reset()
+
+    def test_inspecting_the_event_heap(self):
+        print("")
+
+        def something():
+            print("t=" + str(simulator.now()) + ": something() was called")
+            print(simulator._Simulator__event_heap)
+
+        simulator.ready()
+        simulator.schedule(100, something)
+        simulator.schedule(106, something)
+        simulator.schedule(107, something)
+        print(simulator._Simulator__event_heap)
+        simulator.run()
+        simulator.reset()

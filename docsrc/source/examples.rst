@@ -235,3 +235,48 @@ Instance method as callback (object-oriented)
 .. code-block:: text
 
     t=55: instance of class Example (x=Test) something() with value: ABCDEF
+
+
+Inspecting the event heap
+-------------------------
+
+A developer might be curious regarding what events are present in the event heap
+(e.g., for debugging purposes). The API does not provide access to the internal
+event heap, as a user might erroneously violate the guarantees of the heap.
+Internally, the ``Simulator`` class has a private variable called ``__event_heap``
+(of type list), which is mangled by the Python interpreter to be named
+``_Simulator__event_heap``. Thus, if a developer absolutely wants to inspect the event
+heap, they can call ``print(simulator._Simulator__event_heap)`` to see its content.
+Do not edit the event heap in any way. A heap is *not* simply a sorted list, see
+the `heapq documentation <https://docs.python.org/3/library/heapq.html>`_ for
+more information.
+
+**Code:**
+
+.. code-block:: python
+
+    from discrevpy import simulator
+
+    def something():
+        print("t=" + str(simulator.now()) + ": something() was called")
+        print(simulator._Simulator__event_heap)
+
+    simulator.ready()
+    simulator.schedule(100, something)
+    simulator.schedule(106, something)
+    simulator.schedule(107, something)
+    print(simulator._Simulator__event_heap)
+    simulator.run()
+    simulator.reset()
+
+**Output:**
+
+.. code-block:: text
+
+    [(100, 0, 0, <function something at 0x7fa5b7d79320>, (), {}), (106, 0, 1, <function something at 0x7fa5b7d79320>, (), {}), (107, 0, 2, <function something at 0x7fa5b7d79320>, (), {})]
+    t=100: something() was called
+    [(106, 0, 1, <function something at 0x7fa5b7d79320>, (), {}), (107, 0, 2, <function something at 0x7fa5b7d79320>, (), {})]
+    t=106: something() was called
+    [(107, 0, 2, <function something at 0x7fa5b7d79320>, (), {})]
+    t=107: something() was called
+    []
