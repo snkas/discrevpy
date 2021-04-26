@@ -1,0 +1,11 @@
+.idea/
+.pytest_cache/
+htmlcov/
+dist/
+temp/
+docs/
+*.egg-info
+*.pyc
+*.iml
+.coverage
+coverage.xml
