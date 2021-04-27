@@ -3,7 +3,6 @@
 htmlcov/
 dist/
 temp/
-docs/
 *.egg-info
 *.pyc
 *.iml

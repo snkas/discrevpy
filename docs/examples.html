@@ -1,0 +1,448 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="API reference" href="api_reference.html" /><link rel="prev" title="discrevpy: minimalist discrete event simulator" href="index.html" />
+
+    <link rel="shortcut icon" href="_static/favicon_discrevpy.png"/><meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
+        <title>Examples - discrevpy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
+    <link rel="stylesheet" href="_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" href="_static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">discrevpy 1.0.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><div class="sidebar-scroll"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">discrevpy 1.0.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="what_is_discrete_event_simulation.html">What is discrete event simulation?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practical_tips.html">Practical tips</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory_usage.html">Memory usage</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy/blob/master/LICENSE">MIT license</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy">GitHub repository</a></li>
+</ul>
+
+</div></div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <div class="section" id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="no-callback-arguments">
+<h2>No callback arguments<a class="headerlink" href="#no-callback-arguments" title="Permalink to this headline">¶</a></h2>
+<p><strong>Code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">discrevpy</span> <span class="kn">import</span> <span class="n">simulator</span>
+
+<span class="k">def</span> <span class="nf">something</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"t="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulator</span><span class="o">.</span><span class="n">now</span><span class="p">())</span> <span class="o">+</span> <span class="s2">": something() was called"</span><span class="p">)</span>
+
+<span class="n">simulator</span><span class="o">.</span><span class="n">ready</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">something</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>t=100: something() was called
+</pre></div>
+</div>
+</div>
+<div class="section" id="one-callback-argument">
+<h2>One callback argument<a class="headerlink" href="#one-callback-argument" title="Permalink to this headline">¶</a></h2>
+<p><strong>Code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">discrevpy</span> <span class="kn">import</span> <span class="n">simulator</span>
+
+<span class="k">def</span> <span class="nf">something</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"t="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulator</span><span class="o">.</span><span class="n">now</span><span class="p">())</span> <span class="o">+</span> <span class="s2">": something() with value: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+<span class="n">simulator</span><span class="o">.</span><span class="n">ready</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">something</span><span class="p">,</span> <span class="s2">"ABC"</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>t=100: something() with value: ABC
+</pre></div>
+</div>
+</div>
+<div class="section" id="many-callback-arguments">
+<h2>Many callback arguments<a class="headerlink" href="#many-callback-arguments" title="Permalink to this headline">¶</a></h2>
+<p><strong>Code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">discrevpy</span> <span class="kn">import</span> <span class="n">simulator</span>
+
+<span class="k">def</span> <span class="nf">something</span><span class="p">(</span><span class="n">val1</span><span class="p">,</span> <span class="n">val2</span><span class="p">,</span> <span class="n">abc3</span><span class="p">,</span> <span class="n">xyz</span><span class="o">=</span><span class="mi">28</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">"t="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulator</span><span class="o">.</span><span class="n">now</span><span class="p">())</span> <span class="o">+</span> <span class="s2">": something() with: val1="</span>
+        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">val1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">", val2="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">val2</span><span class="p">)</span> <span class="o">+</span> <span class="s2">", abc3="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">abc3</span><span class="p">)</span> <span class="o">+</span> <span class="s2">", xyz="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">xyz</span><span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="n">simulator</span><span class="o">.</span><span class="n">ready</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">something</span><span class="p">,</span> <span class="s2">"ABC"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">xyz</span><span class="o">=</span><span class="mi">83</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">77</span><span class="p">,</span> <span class="n">something</span><span class="p">,</span> <span class="mi">363</span><span class="p">,</span> <span class="s2">"here"</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>t=0: something() with: val1=ABC, val2=1, abc3=4, xyz=83
+t=77: something() with: val1=363, val2=here, abc3=4, xyz=28
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-an-end-time">
+<h2>Set an end time<a class="headerlink" href="#set-an-end-time" title="Permalink to this headline">¶</a></h2>
+<p><strong>Code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">discrevpy</span> <span class="kn">import</span> <span class="n">simulator</span>
+
+<span class="k">def</span> <span class="nf">something</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"t="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulator</span><span class="o">.</span><span class="n">now</span><span class="p">())</span> <span class="o">+</span> <span class="s2">": something() with value: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+<span class="n">simulator</span><span class="o">.</span><span class="n">ready</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">something</span><span class="p">,</span> <span class="s2">"ABC"</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="n">something</span><span class="p">,</span> <span class="s2">"DEF"</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">160</span><span class="p">,</span> <span class="n">something</span><span class="p">,</span> <span class="s2">"GHI"</span><span class="p">)</span>
+<span class="c1"># End time is 160, meaning that only events scheduled</span>
+<span class="c1"># for t in [0, 160) are executed (thus excluding t = 160)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="mi">160</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>t=100: something() with value: ABC
+t=120: something() with value: DEF
+</pre></div>
+</div>
+</div>
+<div class="section" id="end-while-running">
+<h2>End while running<a class="headerlink" href="#end-while-running" title="Permalink to this headline">¶</a></h2>
+<p><strong>Code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">discrevpy</span> <span class="kn">import</span> <span class="n">simulator</span>
+
+<span class="k">def</span> <span class="nf">something</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"t="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulator</span><span class="o">.</span><span class="n">now</span><span class="p">())</span> <span class="o">+</span> <span class="s2">": something() with value: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">we_are_done</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"t="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulator</span><span class="o">.</span><span class="n">now</span><span class="p">())</span> <span class="o">+</span> <span class="s2">": we_are_done() with value: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+    <span class="n">simulator</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
+
+<span class="n">simulator</span><span class="o">.</span><span class="n">ready</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">something</span><span class="p">,</span> <span class="s2">"ABC"</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="n">something</span><span class="p">,</span> <span class="s2">"DEF"</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">140</span><span class="p">,</span> <span class="n">we_are_done</span><span class="p">,</span> <span class="s2">"XYZ"</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">160</span><span class="p">,</span> <span class="n">something</span><span class="p">,</span> <span class="s2">"TEST"</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">700</span><span class="p">,</span> <span class="n">something</span><span class="p">,</span> <span class="s2">"GHI"</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"End time: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulator</span><span class="o">.</span><span class="n">now</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Number of events not executed: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulator</span><span class="o">.</span><span class="n">event_heap_size</span><span class="p">()))</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>t=100: something() with value: ABC
+t=120: something() with value: DEF
+t=140: we_are_done() with value: XYZ
+End time: 140
+Number of events not executed: 2
+</pre></div>
+</div>
+</div>
+<div class="section" id="schedule-within-a-callback">
+<h2>Schedule within a callback<a class="headerlink" href="#schedule-within-a-callback" title="Permalink to this headline">¶</a></h2>
+<p><strong>Code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">discrevpy</span> <span class="kn">import</span> <span class="n">simulator</span>
+
+<span class="k">def</span> <span class="nf">something</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"t="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulator</span><span class="o">.</span><span class="n">now</span><span class="p">())</span> <span class="o">+</span> <span class="s2">": something() with value: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+    <span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">something</span><span class="p">,</span> <span class="s2">"XYZ"</span><span class="p">)</span>  <span class="c1"># 200 time units in the future from now</span>
+
+<span class="n">simulator</span><span class="o">.</span><span class="n">ready</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">something</span><span class="p">,</span> <span class="s2">"ABC"</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="mi">1001</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>t=200: something() with value: ABC
+t=400: something() with value: XYZ
+t=600: something() with value: XYZ
+t=800: something() with value: XYZ
+t=1000: something() with value: XYZ
+</pre></div>
+</div>
+</div>
+<div class="section" id="multiple-events-in-the-same-time-moment-with-priority">
+<h2>Multiple events in the same time moment with priority<a class="headerlink" href="#multiple-events-in-the-same-time-moment-with-priority" title="Permalink to this headline">¶</a></h2>
+<p><strong>Code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">discrevpy</span> <span class="kn">import</span> <span class="n">simulator</span>
+
+<span class="k">def</span> <span class="nf">something</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"t="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulator</span><span class="o">.</span><span class="n">now</span><span class="p">())</span> <span class="o">+</span> <span class="s2">": something() with value: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+<span class="n">simulator</span><span class="o">.</span><span class="n">ready</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule_with_priority</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="n">something</span><span class="p">,</span> <span class="s2">"XYZ"</span><span class="p">)</span>  <span class="c1"># Priority of 77</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule_with_priority</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="n">something</span><span class="p">,</span> <span class="s2">"ABC"</span><span class="p">)</span>  <span class="c1"># Priority of 44</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>t=100: something() with value: ABC
+t=100: something() with value: XYZ
+</pre></div>
+</div>
+</div>
+<div class="section" id="instance-method-as-callback-object-oriented">
+<h2>Instance method as callback (object-oriented)<a class="headerlink" href="#instance-method-as-callback-object-oriented" title="Permalink to this headline">¶</a></h2>
+<p><strong>Code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">discrevpy</span> <span class="kn">import</span> <span class="n">simulator</span>
+
+<span class="k">class</span> <span class="nc">Example</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="nf">something</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"t="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulator</span><span class="o">.</span><span class="n">now</span><span class="p">())</span> <span class="o">+</span> <span class="s2">": instance of class Example (x="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="s2">") something() with value: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+<span class="n">abc</span> <span class="o">=</span> <span class="n">Example</span><span class="p">(</span><span class="s2">"Test"</span><span class="p">)</span>
+
+<span class="n">simulator</span><span class="o">.</span><span class="n">ready</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">55</span><span class="p">,</span> <span class="n">abc</span><span class="o">.</span><span class="n">something</span><span class="p">,</span> <span class="s2">"ABCDEF"</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>t=55: instance of class Example (x=Test) something() with value: ABCDEF
+</pre></div>
+</div>
+</div>
+<div class="section" id="inspecting-the-event-heap">
+<h2>Inspecting the event heap<a class="headerlink" href="#inspecting-the-event-heap" title="Permalink to this headline">¶</a></h2>
+<p>A developer might be curious regarding what events are present in the event heap
+(e.g., for debugging purposes). The API does not provide access to the internal
+event heap, as a user might erroneously violate the guarantees of the heap.
+Internally, the <code class="docutils literal notranslate"><span class="pre">Simulator</span></code> class has a private variable called <code class="docutils literal notranslate"><span class="pre">__event_heap</span></code>
+(of type list), which is mangled by the Python interpreter to be named
+<code class="docutils literal notranslate"><span class="pre">_Simulator__event_heap</span></code>. Thus, if a developer absolutely wants to inspect the event
+heap, they can call <code class="docutils literal notranslate"><span class="pre">print(simulator._Simulator__event_heap)</span></code> to see its content.
+Do not edit the event heap in any way. A heap is <em>not</em> simply a sorted list, see
+the <a class="reference external" href="https://docs.python.org/3/library/heapq.html">heapq documentation</a> for
+more information.</p>
+<p><strong>Code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">discrevpy</span> <span class="kn">import</span> <span class="n">simulator</span>
+
+<span class="k">def</span> <span class="nf">something</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"t="</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">simulator</span><span class="o">.</span><span class="n">now</span><span class="p">())</span> <span class="o">+</span> <span class="s2">": something() was called"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">simulator</span><span class="o">.</span><span class="n">_Simulator__event_heap</span><span class="p">)</span>
+
+<span class="n">simulator</span><span class="o">.</span><span class="n">ready</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">something</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">106</span><span class="p">,</span> <span class="n">something</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">107</span><span class="p">,</span> <span class="n">something</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">simulator</span><span class="o">.</span><span class="n">_Simulator__event_heap</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[(100, 0, 0, &lt;function something at 0x7fa5b7d79320&gt;, (), {}), (106, 0, 1, &lt;function something at 0x7fa5b7d79320&gt;, (), {}), (107, 0, 2, &lt;function something at 0x7fa5b7d79320&gt;, (), {})]
+t=100: something() was called
+[(106, 0, 1, &lt;function something at 0x7fa5b7d79320&gt;, (), {}), (107, 0, 2, &lt;function something at 0x7fa5b7d79320&gt;, (), {})]
+t=106: something() was called
+[(107, 0, 2, &lt;function something at 0x7fa5b7d79320&gt;, (), {})]
+t=107: something() was called
+[]
+</pre></div>
+</div>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="api_reference.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">API reference</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Home</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, snkas
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="_sources/examples.rst.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Examples</a><ul>
+<li><a class="reference internal" href="#no-callback-arguments">No callback arguments</a></li>
+<li><a class="reference internal" href="#one-callback-argument">One callback argument</a></li>
+<li><a class="reference internal" href="#many-callback-arguments">Many callback arguments</a></li>
+<li><a class="reference internal" href="#set-an-end-time">Set an end time</a></li>
+<li><a class="reference internal" href="#end-while-running">End while running</a></li>
+<li><a class="reference internal" href="#schedule-within-a-callback">Schedule within a callback</a></li>
+<li><a class="reference internal" href="#multiple-events-in-the-same-time-moment-with-priority">Multiple events in the same time moment with priority</a></li>
+<li><a class="reference internal" href="#instance-method-as-callback-object-oriented">Instance method as callback (object-oriented)</a></li>
+<li><a class="reference internal" href="#inspecting-the-event-heap">Inspecting the event heap</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+</html>

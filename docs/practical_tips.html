@@ -1,0 +1,251 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Memory usage" href="memory_usage.html" /><link rel="prev" title="What is discrete event simulation?" href="what_is_discrete_event_simulation.html" />
+
+    <link rel="shortcut icon" href="_static/favicon_discrevpy.png"/><meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
+        <title>Practical tips - discrevpy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
+    <link rel="stylesheet" href="_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" href="_static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">discrevpy 1.0.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><div class="sidebar-scroll"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">discrevpy 1.0.0 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="what_is_discrete_event_simulation.html">What is discrete event simulation?</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Practical tips</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory_usage.html">Memory usage</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy/blob/master/LICENSE">MIT license</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy">GitHub repository</a></li>
+</ul>
+
+</div></div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <div class="section" id="practical-tips">
+<h1>Practical tips<a class="headerlink" href="#practical-tips" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="event-execution-is-generally-the-bottleneck-keep-it-o-1-or-o-log-n">
+<h2>Event execution is generally the bottleneck: keep it O(1) or O(log n)<a class="headerlink" href="#event-execution-is-generally-the-bottleneck-keep-it-o-1-or-o-log-n" title="Permalink to this headline">¶</a></h2>
+<p>Generally, insertion of new events into the event queue is not the bottleneck. Rather the time it takes to execute the events is the more likely dominant time factor. In an event execution, you can of course do any computation you want. This almost always consists of events modifying state, which consists of data structures whose functions have time complexity (e.g., memory allocation, queue insertion, passing of events).</p>
+<p>An event type with a slow runtime which is often inserted/executed can slow down your simulation significantly. E.g., if you have the arrival of packets into a queue of 100000 elements, make sure the queue insertion is O(1) or O(log n) at worse. Discrete-event simulation is not magic, it is only the simulation of time.</p>
+</div>
+<div class="section" id="however-also-do-not-fill-up-the-event-queue-unnecessarily">
+<h2>However: also do not fill up the event queue unnecessarily<a class="headerlink" href="#however-also-do-not-fill-up-the-event-queue-unnecessarily" title="Permalink to this headline">¶</a></h2>
+<p>Of course, insert events only if it is absolutely necessary. If you blow up your event queue to 1’000’000+ events, the O(log n) insertion for each new event is still going to slow you down.</p>
+<p><strong>The following guidelines should be followed:</strong></p>
+<div class="section" id="do-not-pre-plan-all-events-of-a-process-which-is-regenerative">
+<h3>Do not pre-plan all events of a process which is regenerative<a class="headerlink" href="#do-not-pre-plan-all-events-of-a-process-which-is-regenerative" title="Permalink to this headline">¶</a></h3>
+<p>Example: let’s say every 10ms you want to send a message from A to B. Don’t insert for the entire duration of the simulation (e.g., 100s) all events (e.g., 10000) but instead insert one, which then at the end of its execution inserts the next one 10ms from then.</p>
+</div>
+<div class="section" id="be-wary-of-inserting-a-far-in-the-future-event-for-a-thing-which-occurs-often">
+<h3>Be wary of inserting a far-in-the-future event for a thing which occurs often<a class="headerlink" href="#be-wary-of-inserting-a-far-in-the-future-event-for-a-thing-which-occurs-often" title="Permalink to this headline">¶</a></h3>
+<p>If you insert 100’000 events, each of which is scheduled for 1 ms then they only interfere for that 1 ms. If they are schedule for 1000 s, then they increase event insertion duration for the simulation of those whole thousand seconds.</p>
+</div>
+<div class="section" id="group-events-if-the-model-accuracy-loss-is-acceptable">
+<h3>Group events if the model accuracy loss is acceptable<a class="headerlink" href="#group-events-if-the-model-accuracy-loss-is-acceptable" title="Permalink to this headline">¶</a></h3>
+<p>It might be that many events actually happen at slightly different times, but that with some loss of model accuracy, you can group them. You do this by maintaining a list of the things that happened in that time interval, and then having a regenerative event in a time interval (e.g., 10ms) which goes over the list. It’s like the efficiency of garbage collection in Java (process in batches).</p>
+</div>
+<div class="section" id="if-you-can-leave-it-to-post-processing">
+<h3>If you can, leave it to post-processing<a class="headerlink" href="#if-you-can-leave-it-to-post-processing" title="Permalink to this headline">¶</a></h3>
+<p>You can always save things in state and then later on process them. This is especially true for collection of logs or statistics: don’t for each thing you log something for insert an event at the end of the simulation which processes the logs, but instead keep it in state and save a list of the things. Then in post-processing after the simulation go over the list.</p>
+</div>
+<div class="section" id="be-careful-of-events-generating-events-spiraling-out-of-control">
+<h3>Be careful of events generating events spiraling out of control<a class="headerlink" href="#be-careful-of-events-generating-events-spiraling-out-of-control" title="Permalink to this headline">¶</a></h3>
+<p>Events creating other events is the key concept of discrete event simulation. However, be aware that this does not spiral out of control, don’t insert insert new events continuously at a small future time scale. This can event accidentally: zero is a valid future time, indicating it needs to be execute in the same time step as the event being executed right now. An integer division of int a = 10 / 100 will round to a = 0. Discrete event simulation also happens at fixed time granularity, so even if you set an event to 0.3 nanoseconds in the future, if the granularity is 1 nanosecond, the event will either be 0 or 1 ns in the future.</p>
+</div>
+</div>
+<div class="section" id="pre-process-pre-calculate-as-much-as-possible">
+<h2>Pre-process/pre-calculate as much as possible<a class="headerlink" href="#pre-process-pre-calculate-as-much-as-possible" title="Permalink to this headline">¶</a></h2>
+<p>If you have values which you can calculate beforehand which remain the same for each experimental run, it might be worthwhile to pre-calculate these, and then read in the pre-calculated values from file at the start of each run. Depending on the task, the pre-calculation you might want to do on many machines or in a more convenient programming language (with e.g., better libraries available or hardware acceleration).</p>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="memory_usage.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Memory usage</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="what_is_discrete_event_simulation.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">What is discrete event simulation?</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, snkas
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="_sources/practical_tips.rst.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Practical tips</a><ul>
+<li><a class="reference internal" href="#event-execution-is-generally-the-bottleneck-keep-it-o-1-or-o-log-n">Event execution is generally the bottleneck: keep it O(1) or O(log n)</a></li>
+<li><a class="reference internal" href="#however-also-do-not-fill-up-the-event-queue-unnecessarily">However: also do not fill up the event queue unnecessarily</a><ul>
+<li><a class="reference internal" href="#do-not-pre-plan-all-events-of-a-process-which-is-regenerative">Do not pre-plan all events of a process which is regenerative</a></li>
+<li><a class="reference internal" href="#be-wary-of-inserting-a-far-in-the-future-event-for-a-thing-which-occurs-often">Be wary of inserting a far-in-the-future event for a thing which occurs often</a></li>
+<li><a class="reference internal" href="#group-events-if-the-model-accuracy-loss-is-acceptable">Group events if the model accuracy loss is acceptable</a></li>
+<li><a class="reference internal" href="#if-you-can-leave-it-to-post-processing">If you can, leave it to post-processing</a></li>
+<li><a class="reference internal" href="#be-careful-of-events-generating-events-spiraling-out-of-control">Be careful of events generating events spiraling out of control</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pre-process-pre-calculate-as-much-as-possible">Pre-process/pre-calculate as much as possible</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+</html>
