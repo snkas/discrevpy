@@ -32,7 +32,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='discrevpy',
-    version='1.0.1',
+    version='1.0.2',
     description='Minimalist discrete event simulator',
     license='MIT',
     python_requires='>=3.7',
