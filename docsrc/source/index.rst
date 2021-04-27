@@ -25,7 +25,7 @@ Installation
 
 .. code-block:: text
 
-   python3 -m pip install git+https://github.com/snkas/discrevpy.git@v0.2.6
+   python3 -m pip install git+https://github.com/snkas/discrevpy.git@v1.0.0
 
 
 Getting started

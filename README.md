@@ -14,7 +14,7 @@ and is thus exclusively single-threaded.
 **Python version: 3.7+**
 
 ```bash
-python3 -m pip install git+https://github.com/snkas/discrevpy.git@v0.2.6
+python3 -m pip install git+https://github.com/snkas/discrevpy.git@v1.0.0
 ```
 
 

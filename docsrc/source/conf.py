@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.abspath('./../../discrevpy'))
 project = 'discrevpy'
 copyright = '2021, snkas'
 author = 'snkas'
-release = '0.2.6'
+release = '1.0.0'
 language = 'en'
 
 # General configuration
