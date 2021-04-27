@@ -1,6 +1,18 @@
 discrevpy: minimalist discrete event simulator
 ==============================================
 
+.. image:: https://github.com/snkas/discrevpy/workflows/build/badge.svg
+   :alt: build
+   :target: https://github.com/snkas/discrevpy/actions?query=workflow%3Abuild+branch%3Amaster
+
+.. image:: https://codecov.io/gh/snkas/discrevpy/branch/master/graph/badge.svg
+   :alt: codecov
+   :target: https://codecov.io/gh/snkas/discrevpy
+
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+   :alt: license: MIT
+   :target: https://opensource.org/licenses/MIT
+
 **discrevpy** is a minimalist discrete event simulator in Python. It makes use of function/method
 callbacks in its event execution. The discrevpy simulator does not implement any message passing
 and is thus exclusively single-threaded.
@@ -53,5 +65,7 @@ Documentation
    what_is_discrete_event_simulation
    practical_tips
    memory_usage
+   MIT license <https://github.com/snkas/discrevpy/blob/master/LICENSE>
+   GitHub repository <https://github.com/snkas/discrevpy>
    :name: title
    :maxdepth: 2
