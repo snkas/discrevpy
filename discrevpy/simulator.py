@@ -87,7 +87,8 @@ class Simulator:
         the earliest end time will be the end time. As such, an end()
         call cannot be undone.
 
-        :param delay:    Delay from current simulation time (now) to end the simulation
+        :param delay:    (Optional; default: 0)
+                         Delay from current simulation time (now) to end the simulation
         """
 
         # Simulator must be in either ready or running state
