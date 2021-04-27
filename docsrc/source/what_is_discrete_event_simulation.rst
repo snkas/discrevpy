@@ -1,11 +1,6 @@
 What is discrete event simulation?
 ==================================
 
-.. toctree::
-   :maxdepth: 1
-   :hidden:
-
-
 Goal
 ----
 

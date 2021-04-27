@@ -1,10 +1,6 @@
 Examples
 ========
 
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-
 No callback arguments
 ---------------------
 

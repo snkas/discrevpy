@@ -18,8 +18,15 @@ extensions = [
 exclude_patterns = []
 
 # Options for HTML output
-html_theme = 'nature'
+html_theme = 'furo'
 html_sidebars = {
-    '**': ['globaltoc.html', 'searchbox.html'],
+    '**': [
+        "sidebar/scroll-start.html",
+        "sidebar/brand.html",
+        "sidebar/search.html",
+        "sidebar/navigation.html",
+        "sidebar/scroll-end.html",
+    ]
 }
 html_extra_path = ['_extra']
+html_favicon = 'favicon_discrevpy.png'

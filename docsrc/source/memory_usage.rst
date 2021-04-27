@@ -1,10 +1,6 @@
 Memory usage
 ============
 
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-
 Base sizes for each event
 -------------------------
 

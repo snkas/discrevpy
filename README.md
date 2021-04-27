@@ -11,68 +11,82 @@ and is thus exclusively single-threaded.
 
 ## Installation
 
-**Requirements**
-* Python 3.7+
-* (optional) pytest (`python3 -m pip install pytest`)
-* (optional) coverage (`python3 -m pip install coverage`)
-* (optional) pylint (`python3 -m pip install pylint`)
-* (optional) sphinx (`python3 -m pip install sphinx`)
-
-**Option 1**
+**Python version: 3.7+**
 
 ```bash
 python3 -m pip install git+https://github.com/snkas/discrevpy.git@v0.2.6
 ```
 
-**Option 2**
-
-Clone/download this Git repository. Then, execute the following to install the package locally:
-
-```bash
-cd /path/to/discrevpy
-python3 -m pip install .
-```
-
 
 ## Getting started
 
-* **Example usage:**
+**Example usage:**
 
-  ```python
-  from discrevpy import simulator
-  
-  def something(value):
-      print("t=" + str(simulator.now()) + ": something() with value " + str(value))
-    
-  simulator.ready()
-  simulator.schedule(44, something, "ABC")
-  simulator.schedule(967, something, "XYZ")
-  simulator.end(10000)
-  simulator.run()
-  simulator.reset()
-  ```
+```python
+from discrevpy import simulator
+
+def something(value):
+  print("t=" + str(simulator.now()) + ": something() with value " + str(value))
+
+simulator.ready()
+simulator.schedule(44, something, "ABC")
+simulator.schedule(967, something, "XYZ")
+simulator.end(10000)
+simulator.run()
+simulator.reset()
+```
+
+**Documentation:**
+
+https://snkas.github.io/discrevpy/
+
+**Next steps:**
+
+* [View more examples](https://snkas.github.io/discrevpy/examples.html)
+* [Explore the API](https://snkas.github.io/discrevpy/api_reference.html)
+* [Learn more about discrete event simulation](https://snkas.github.io/discrevpy/what_is_discrete_event_simulation.html)
+* [Read some tips to help you speed up your simulations](https://snkas.github.io/discrevpy/practical_tips.html)
+* [Understand better the memory usage overhead of discrevpy](https://snkas.github.io/discrevpy/memory_usage.html)
 
 
 ## Development
 
-Run tests:
+**Requirements:**
+* pytest (`python3 -m pip install pytest`)
+* coverage (`python3 -m pip install coverage`)
+* pylint (`python3 -m pip install pylint`)
+* sphinx (`python3 -m pip install sphinx`)
+* furo (`python3 -m pip install furo`)
+
+**Install latest development version:**
+1. Clone the GitHub repository:
+   ```bash
+   git clone git@github.com:snkas/discrevpy.git
+   ```
+2. Install locally using `pip`:
+   ```bash
+   cd discrevpy
+   python3 -m pip install .
+   ```
+
+**Run tests:**
 ```bash
 python3 -m pytest
 ```
 
-Calculate coverage (outputs `.coverage`, `coverage.xml` and `htmlcov/`):
+**Calculate coverage (outputs `.coverage`, `coverage.xml` and `htmlcov/`):**
 ```bash
 python3 -m coverage run --branch --omit="tests/*" -m pytest
 python3 -m coverage xml
 python3 -m coverage html
 ```
 
-Pylint check:
+**Pylint check:**
 ```bash
 python3 -m pylint discrevpy/*.py
 ```
 
-Generate documentation (index output at `docsrc/build/html/index.html`):
+**Generate documentation (outputs HTML at `docs/`):**
 ```bash
 cd docsrc
 make html

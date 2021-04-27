@@ -24,19 +24,33 @@
 
 from distutils.core import setup
 
+# Read contents of README.md for the long description
+from os import path
+this_directory = path.abspath(path.dirname(__file__))
+with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
 setup(
     name='discrevpy',
     version='0.2.6',
-    description="Minimalist discrete event simulator",
-    license="MIT",
+    description='Minimalist discrete event simulator',
+    license='MIT',
     python_requires='>=3.7',
-    author="snkas",
-    author_email="snkasdev+discrevpy@gmail.com",
-    url="https://github.com/snkas/discrevpy",
+    author='snkas',
+    author_email='snkasdev+discrevpy@gmail.com',
+    url='https://github.com/snkas/discrevpy',
     packages=['discrevpy'],
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     classifiers=[
-        "Programming Language :: Python :: 3 :: Only",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent"
-    ]
+        'Development Status :: 4 - Beta',
+        'Programming Language :: Python :: 3 :: Only',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent'
+    ],
+    project_urls={
+        "Documentation": "https://snkas.github.io/discrevpy/",
+        "Bug Tracker": "https://github.com/snkas/discrevpy/issues",
+        "Source Code": "https://github.com/snkas/discrevpy"
+    }
 )
