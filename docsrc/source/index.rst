@@ -49,7 +49,8 @@ Getting started
 
 **Next steps:**
 
-* :doc:`View more examples <examples>`
+* :doc:`View some short examples <short_examples>`
+* :doc:`View more in-depth longer examples <long_examples>`
 * :doc:`Explore the API <api_reference>`
 * :doc:`Learn more about discrete event simulation <what_is_discrete_event_simulation>`
 * :doc:`Read some tips to help you speed up your simulations <practical_tips>`
@@ -60,7 +61,8 @@ Documentation
 ---------------
 
 .. toctree::
-   examples
+   short_examples
+   long_examples
    api_reference
    what_is_discrete_event_simulation
    practical_tips
