@@ -1,0 +1,306 @@
+<!doctype html>
+<html class="no-js">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="API reference" href="api_reference.html" /><link rel="prev" title="Short examples" href="short_examples.html" />
+
+    <link rel="shortcut icon" href="_static/favicon_discrevpy.png"/><meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
+        <title>Long examples - discrevpy 1.0.3 documentation</title>
+      <link rel="stylesheet" href="_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
+    <link rel="stylesheet" href="_static/pygments.css">
+    <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
+    
+
+
+<style>
+  :root {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+  }
+
+  /* For allowing end-user-specific overrides */
+  .override-light {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  .override-dark {
+    --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+  }
+</style><link rel="stylesheet" href="_static/styles/furo-extensions.css?digest=d391b54134226e4196576da3bdb6dddb7e05ba2b"></head>
+  <body dir="">
+    
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z"/>
+      <line x1="4" y1="6" x2="20" y2="6" />
+      <line x1="10" y1="12" x2="20" y2="12" />
+      <line x1="6" y1="18" x2="20" y2="18" />
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      class="feather feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">discrevpy 1.0.3 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><div class="sidebar-scroll"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">discrevpy 1.0.3 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html">
+  <input class="sidebar-search" placeholder=Search name="q">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="short_examples.html">Short examples</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Long examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="what_is_discrete_event_simulation.html">What is discrete event simulation?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="practical_tips.html">Practical tips</a></li>
+<li class="toctree-l1"><a class="reference internal" href="memory_usage.html">Memory usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy/blob/master/LICENSE">MIT license</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy">GitHub repository</a></li>
+</ul>
+
+</div></div>
+      </div>
+      
+    </div>
+  </aside>
+  <main class="main">
+    <div class="content">
+      <article role="main">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+        </label>
+        <div class="section" id="long-examples">
+<h1>Long examples<a class="headerlink" href="#long-examples" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="x100m-relay">
+<h2>4x100m relay<a class="headerlink" href="#x100m-relay" title="Permalink to this headline">¶</a></h2>
+<p><strong>Description:</strong></p>
+<p>We want to simulate a 4x100m relay, and are interested in predicting the finish time.
+For each athlete in the relay, we look up their personal best time on the individual 100m
+and calculate their speed in meter per second.
+In this example, we choose the four athletes at the time of writing (May 1st, 2021) holding the world record on the 4x100m relay <a class="reference internal" href="#wr" id="id1"><span>[WR]</span></a>:</p>
+<ol class="arabic simple">
+<li><p>Nesta Carter: <code class="docutils literal notranslate"><span class="pre">100m</span> <span class="pre">/</span> <span class="pre">9.78s</span> <span class="pre">=</span></code> 10.2 m/s <a class="reference internal" href="#wa1" id="id2"><span>[WA1]</span></a></p></li>
+<li><p>Michael Frater: <code class="docutils literal notranslate"><span class="pre">100m</span> <span class="pre">/</span> <span class="pre">9.88s</span> <span class="pre">=</span></code> 10.1 m/s <a class="reference internal" href="#wa2" id="id3"><span>[WA2]</span></a></p></li>
+<li><p>Yohan Blake: <code class="docutils literal notranslate"><span class="pre">100m</span> <span class="pre">/</span> <span class="pre">9.69s</span> <span class="pre">=</span></code> 10.3 m/s <a class="reference internal" href="#wa3" id="id4"><span>[WA3]</span></a></p></li>
+<li><p>Usain Bolt: <code class="docutils literal notranslate"><span class="pre">100m</span> <span class="pre">/</span> <span class="pre">9.58s</span> <span class="pre">=</span></code> 10.4 m/s <a class="reference internal" href="#wa4" id="id5"><span>[WA4]</span></a></p></li>
+</ol>
+<p>Of course, this is an example, so yes: we could just add their times together and get an answer.
+However, as a model becomes more and more complex to account for new factors, discrete event
+simulation is a useful tool to maintain an overview.
+For this example, one could extend the model to include varying wind conditions over time, reaction times, technological improvements in shoes, etc.: whatever factors might be influential.</p>
+<p>The smallest simulation time unit we set to 1 nanosecond (1 second = 1e9 nanoseconds).
+Be aware that floating point operations (such as the time calculation in this example) can be
+less accurate than the simulation time precision as it depends on the number of significant
+digits (not on the number of decimal digits, in which we define our simulation time unit).
+See the <a class="reference external" href="https://docs.python.org/3/tutorial/floatingpoint.html">floating point arithmetic documentation</a>
+for more information. Keep in mind that our speed estimates only have three significant digits.</p>
+<p><strong>Code:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">discrevpy</span> <span class="kn">import</span> <span class="n">simulator</span>
+
+<span class="k">def</span> <span class="nf">relay_finished</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Last athlete finished: 4x100m relay in </span><span class="si">%.3g</span><span class="s2">s"</span> <span class="o">%</span> <span class="p">(</span><span class="n">simulator</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">/</span> <span class="mf">1e9</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">Athlete</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">athletes</span><span class="p">,</span> <span class="n">speed_m_per_s</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">idx</span> <span class="o">=</span> <span class="n">idx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">athletes</span> <span class="o">=</span> <span class="n">athletes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">speed_m_per_s</span> <span class="o">=</span> <span class="n">speed_m_per_s</span>
+
+    <span class="k">def</span> <span class="nf">receive_stick_and_run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Athlete </span><span class="si">%d</span><span class="s2"> receives stick and starts run at t=</span><span class="si">%.3g</span><span class="s2">s"</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">idx</span><span class="p">,</span> <span class="n">simulator</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">/</span> <span class="mf">1e9</span><span class="p">))</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">idx</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">athletes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span>
+                <span class="nb">int</span><span class="p">(</span><span class="mf">100.0</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed_m_per_s</span> <span class="o">*</span> <span class="mf">1e9</span><span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">athletes</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">receive_stick_and_run</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span>
+                <span class="nb">int</span><span class="p">(</span><span class="mf">100.0</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">speed_m_per_s</span> <span class="o">*</span> <span class="mf">1e9</span><span class="p">),</span>
+                <span class="n">relay_finished</span>
+            <span class="p">)</span>
+
+<span class="n">athletes</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">athletes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Athlete</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">athletes</span><span class="p">,</span> <span class="mf">10.2</span><span class="p">))</span>  <span class="c1"># Nesta Carter</span>
+<span class="n">athletes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Athlete</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">athletes</span><span class="p">,</span> <span class="mf">10.1</span><span class="p">))</span>  <span class="c1"># Michael Frater</span>
+<span class="n">athletes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Athlete</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">athletes</span><span class="p">,</span> <span class="mf">10.3</span><span class="p">))</span>  <span class="c1"># Yohan Blake</span>
+<span class="n">athletes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Athlete</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">athletes</span><span class="p">,</span> <span class="mf">10.4</span><span class="p">))</span>  <span class="c1"># Usain Bolt</span>
+<span class="c1"># All Athlete instances will now have a complete athletes list</span>
+<span class="c1"># because Python objects are passed by reference</span>
+
+<span class="n">simulator</span><span class="o">.</span><span class="n">ready</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">athletes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">receive_stick_and_run</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Simulating a 4x100m relay"</span><span class="p">)</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">simulator</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Output:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Simulating a 4x100m relay
+Athlete 0 receives stick and starts run at t=0s
+Athlete 1 receives stick and starts run at t=9.8s
+Athlete 2 receives stick and starts run at t=19.7s
+Athlete 3 receives stick and starts run at t=29.4s
+Last athlete finished: 4x100m relay in 39s
+</pre></div>
+</div>
+<p><strong>References:</strong></p>
+<dl class="citation">
+<dt class="label" id="wr"><span class="brackets"><a class="fn-backref" href="#id1">WR</a></span></dt>
+<dd><p><a class="reference external" href="https://www.worldathletics.org/records/all-time-toplists/relays/4x100-metres-relay/outdoor/men/senior">https://www.worldathletics.org/records/all-time-toplists/relays/4x100-metres-relay/outdoor/men/senior</a>
+(accessed May 1st, 2021)</p>
+</dd>
+<dt class="label" id="wa1"><span class="brackets"><a class="fn-backref" href="#id2">WA1</a></span></dt>
+<dd><p><a class="reference external" href="https://www.worldathletics.org/athletes/jamaica/nesta-carter-14201894">https://www.worldathletics.org/athletes/jamaica/nesta-carter-14201894</a>
+(accessed May 1st, 2021)</p>
+</dd>
+<dt class="label" id="wa2"><span class="brackets"><a class="fn-backref" href="#id3">WA2</a></span></dt>
+<dd><p><a class="reference external" href="https://www.worldathletics.org/athletes/jamaica/michael-frater-14202005">https://www.worldathletics.org/athletes/jamaica/michael-frater-14202005</a>
+(accessed May 1st, 2021)</p>
+</dd>
+<dt class="label" id="wa3"><span class="brackets"><a class="fn-backref" href="#id4">WA3</a></span></dt>
+<dd><p><a class="reference external" href="https://www.worldathletics.org/athletes/jamaica/yohan-blake-14201842">https://www.worldathletics.org/athletes/jamaica/yohan-blake-14201842</a>
+(accessed May 1st, 2021)</p>
+</dd>
+<dt class="label" id="wa4"><span class="brackets"><a class="fn-backref" href="#id5">WA4</a></span></dt>
+<dd><p><a class="reference external" href="https://www.worldathletics.org/athletes/jamaica/usain-bolt-14201847">https://www.worldathletics.org/athletes/jamaica/usain-bolt-14201847</a>
+(accessed May 1st, 2021)</p>
+</dd>
+</dl>
+</div>
+</div>
+
+      </article>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="api_reference.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">API reference</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="short_examples.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Short examples</div>
+                
+              </div>
+            </a>
+        </div>
+
+        <div class="related-information">
+              Copyright &#169; 2021, snkas
+            |
+            Built with <a href="https://www.sphinx-doc.org/">Sphinx</a>
+              and
+              <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+              <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="_sources/long_examples.rst.txt"
+               rel="nofollow">
+              Show Source
+            </a>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Long examples</a><ul>
+<li><a class="reference internal" href="#x100m-relay">4x100m relay</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </main>
+</div>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
+</html>

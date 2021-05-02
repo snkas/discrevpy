@@ -2,10 +2,10 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Practical tips" href="practical_tips.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Development" href="development.html" /><link rel="prev" title="Practical tips" href="practical_tips.html" />
 
     <link rel="shortcut icon" href="_static/favicon_discrevpy.png"/><meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
-        <title>Memory usage - discrevpy 1.0.2 documentation</title>
+        <title>Memory usage - discrevpy 1.0.3 documentation</title>
       <link rel="stylesheet" href="_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
     <link rel="stylesheet" href="_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
@@ -86,7 +86,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">discrevpy 1.0.2 documentation</div></a>
+      <a href="index.html"><div class="brand">discrevpy 1.0.3 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
@@ -100,7 +100,7 @@
       <div class="sidebar-sticky"><div class="sidebar-scroll"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">discrevpy 1.0.2 documentation</span>
+  <span class="sidebar-brand-text">discrevpy 1.0.3 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html">
   <input class="sidebar-search" placeholder=Search name="q">
@@ -108,11 +108,13 @@
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="short_examples.html">Short examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="long_examples.html">Long examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api_reference.html">API reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="what_is_discrete_event_simulation.html">What is discrete event simulation?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="practical_tips.html">Practical tips</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Memory usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy/blob/master/LICENSE">MIT license</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy">GitHub repository</a></li>
 </ul>
@@ -181,7 +183,7 @@ Total:           536
 
 <span class="k">class</span> <span class="nc">TestMemory</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">TestCase</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">test_memory_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="k">def</span> <span class="nf">x</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
             <span class="k">pass</span>
@@ -198,7 +200,7 @@ Total:           536
         <span class="n">simulator</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>… and then running it using: <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">pytest</span> <span class="pre">-s</span> <span class="pre">-k</span> <span class="pre">test_memory_size</span></code></p>
+<p>… and then running it using: <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">pytest</span> <span class="pre">-s</span> <span class="pre">-k</span> <span class="pre">test_memory_usage</span></code></p>
 </div>
 </div>
 
@@ -206,7 +208,15 @@ Total:           536
       <footer>
         
         <div class="related-pages">
-          
+          <a class="next-page" href="development.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Development</div>
+              </div>
+              <svg><use href="#svg-arrow-right"></use></svg>
+            </a>
           <a class="prev-page" href="practical_tips.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">

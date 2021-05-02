@@ -2,10 +2,11 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="Memory usage" href="memory_usage.html" />
 
-    <link rel="shortcut icon" href="_static/favicon_discrevpy.png"/><meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/><title>Python Module Index - discrevpy 1.0.3 documentation</title>
-<link rel="stylesheet" href="_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
+    <link rel="shortcut icon" href="_static/favicon_discrevpy.png"/><meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
+        <title>Development - discrevpy 1.0.3 documentation</title>
+      <link rel="stylesheet" href="_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
     <link rel="stylesheet" href="_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
     
@@ -88,7 +89,7 @@
       <a href="index.html"><div class="brand">discrevpy 1.0.3 documentation</div></a>
     </div>
     <div class="header-right">
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
     </div>
@@ -106,14 +107,14 @@
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-tree">
-  <ul>
+  <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="short_examples.html">Short examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="long_examples.html">Long examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api_reference.html">API reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="what_is_discrete_event_simulation.html">What is discrete event simulation?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="practical_tips.html">Practical tips</a></li>
 <li class="toctree-l1"><a class="reference internal" href="memory_usage.html">Memory usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Development</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy/blob/master/LICENSE">MIT license</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy">GitHub repository</a></li>
 </ul>
@@ -126,35 +127,85 @@
   <main class="main">
     <div class="content">
       <article role="main">
-        <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+        <label class="toc-overlay-icon toc-content-icon" for="__toc">
           <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
         </label>
-        
-<section class="domainindex-section">
-  <h1>Python Module Index</h1>
-  <div class="domainindex-jumpbox"><a href="#cap-s"><strong>s</strong></a></div>
-</section>
-<table class="domainindex-table">
-  <tr class="pcap">
-    <td></td><td>&#160;</td><td></td>
-  </tr>
-  <tr class="cap" id="cap-s">
-    <td></td><td><strong>s</strong></td><td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>
-        <a href="api_reference.html#module-simulator"><code class="xref">simulator</code></a></td><td>
-    <em></em></td>
-  </tr>
-</table>
+        <div class="section" id="development">
+<h1>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>python3 -m pip install pytest coverage pylint sphinx sphinx-autodoc-typehints furo
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-latest-development-version">
+<h2>Install latest development version<a class="headerlink" href="#install-latest-development-version" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Clone the GitHub repository:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>git clone git@github.com:snkas/discrevpy.git
+</pre></div>
+</div>
+</li>
+<li><p>Install locally using <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cd discrevpy
+python3 -m pip install .
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="run-tests">
+<h2>Run tests<a class="headerlink" href="#run-tests" title="Permalink to this headline">¶</a></h2>
+<p><strong>All tests:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>python3 -m pytest
+</pre></div>
+</div>
+<p><strong>Specific test showing stdout:</strong></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>python3 -m pytest -s -k test_name
+</pre></div>
+</div>
+</div>
+<div class="section" id="calculate-coverage">
+<h2>Calculate coverage<a class="headerlink" href="#calculate-coverage" title="Permalink to this headline">¶</a></h2>
+<p>Outputs: <code class="docutils literal notranslate"><span class="pre">.coverage</span></code>, <code class="docutils literal notranslate"><span class="pre">coverage.xml</span></code> and <code class="docutils literal notranslate"><span class="pre">htmlcov/</span></code></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>python3 -m coverage run --branch --omit="tests/*" -m pytest
+python3 -m coverage xml
+python3 -m coverage html
+</pre></div>
+</div>
+</div>
+<div class="section" id="pylint-check">
+<h2>Pylint check<a class="headerlink" href="#pylint-check" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>python3 -m pylint discrevpy/*.py
+</pre></div>
+</div>
+</div>
+<div class="section" id="generate-documentation">
+<h2>Generate documentation<a class="headerlink" href="#generate-documentation" title="Permalink to this headline">¶</a></h2>
+<p>Outputs HTML at <code class="docutils literal notranslate"><span class="pre">docs/</span></code></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cd docsrc
+make html
+</pre></div>
+</div>
+</div>
+</div>
 
       </article>
       <footer>
         
         <div class="related-pages">
           
-          
+          <a class="prev-page" href="memory_usage.html">
+              <svg><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Memory usage</div>
+                
+              </div>
+            </a>
         </div>
 
         <div class="related-information">
@@ -164,12 +215,41 @@
               and
               <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
               <a href="https://github.com/pradyunsg/furo">Furo theme</a>.
+            |
+            <a class="muted-link" href="_sources/development.rst.txt"
+               rel="nofollow">
+              Show Source
+            </a>
         </div>
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Development</a><ul>
+<li><a class="reference internal" href="#requirements">Requirements</a></li>
+<li><a class="reference internal" href="#install-latest-development-version">Install latest development version</a></li>
+<li><a class="reference internal" href="#run-tests">Run tests</a></li>
+<li><a class="reference internal" href="#calculate-coverage">Calculate coverage</a></li>
+<li><a class="reference internal" href="#pylint-check">Pylint check</a></li>
+<li><a class="reference internal" href="#generate-documentation">Generate documentation</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -179,6 +259,5 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script>
-    <script>DOCUMENTATION_OPTIONS.COLLAPSE_INDEX = true</script></body>
+    <script src="_static/scripts/main.js?digest=e931d09b2a40c1bb82b542effe772014573baf67"></script></body>
 </html>

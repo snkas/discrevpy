@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Practical tips" href="practical_tips.html" /><link rel="prev" title="API reference" href="api_reference.html" />
 
     <link rel="shortcut icon" href="_static/favicon_discrevpy.png"/><meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
-        <title>What is discrete event simulation? - discrevpy 1.0.2 documentation</title>
+        <title>What is discrete event simulation? - discrevpy 1.0.3 documentation</title>
       <link rel="stylesheet" href="_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
     <link rel="stylesheet" href="_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
@@ -86,7 +86,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">discrevpy 1.0.2 documentation</div></a>
+      <a href="index.html"><div class="brand">discrevpy 1.0.3 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
@@ -100,7 +100,7 @@
       <div class="sidebar-sticky"><div class="sidebar-scroll"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">discrevpy 1.0.2 documentation</span>
+  <span class="sidebar-brand-text">discrevpy 1.0.3 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html">
   <input class="sidebar-search" placeholder=Search name="q">
@@ -108,11 +108,13 @@
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="short_examples.html">Short examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="long_examples.html">Long examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api_reference.html">API reference</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">What is discrete event simulation?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="practical_tips.html">Practical tips</a></li>
 <li class="toctree-l1"><a class="reference internal" href="memory_usage.html">Memory usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy/blob/master/LICENSE">MIT license</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy">GitHub repository</a></li>
 </ul>
@@ -132,28 +134,33 @@
 <h1>What is discrete event simulation?<a class="headerlink" href="#what-is-discrete-event-simulation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="goal">
 <h2>Goal<a class="headerlink" href="#goal" title="Permalink to this headline">¶</a></h2>
-<p>You want to simulate a real physical system. The first idea would be to calculate what the system does at a fixed time step, however at a small time step this would take too long and potentially many of the steps will have nothing happening. As such, we make use of discrete event simulation. In discrete event simulation, you only do something if there is something meaningful: an event occurs. The simulation hops from event to event, and simulation time progresses as such.</p>
+<p>The goal is to simulate a real physical system to gain insight how it would perform.
+Instead of updating system state at a fixed time step, in discrete event simulation
+it only updates when there is something meaningful occurring: an event <a class="reference internal" href="#fujimoto2000" id="id1"><span>[Fujimoto2000]</span></a>.
+The simulation jumps from one event to the next, and simulation time is incremented by
+the time gap between subsequent events.</p>
 </div>
 <div class="section" id="key-terminology">
 <h2>Key terminology<a class="headerlink" href="#key-terminology" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><strong>Physical time:</strong> time in the physical system (definition from [1]).</p></li>
-<li><p><strong>Simulation time:</strong> abstraction used by the simulation to model physical time (definition from [1]).</p></li>
-<li><p><strong>Wallclock time:</strong> time during the execution of the simulation program (definition from [1]).</p></li>
-<li><p><strong>Event:</strong> something occurs at a certain point in time. In the simulation, an event is represented by a data structure with at least two fields:</p>
+<li><p><strong>Physical time:</strong> <em>“time in the physical system”</em> <a class="reference internal" href="#fujimoto2000" id="id2"><span>[Fujimoto2000]</span></a></p></li>
+<li><p><strong>Simulation time:</strong> <em>“abstraction used by the simulation to model physical time”</em> <a class="reference internal" href="#fujimoto2000" id="id3"><span>[Fujimoto2000]</span></a></p></li>
+<li><p><strong>Wallclock time:</strong> <em>“time during the execution of the simulation program”</em> <a class="reference internal" href="#fujimoto2000" id="id4"><span>[Fujimoto2000]</span></a></p></li>
+<li><p><strong>Event:</strong> something occurs at a certain point in time <a class="reference internal" href="#fujimoto2000" id="id5"><span>[Fujimoto2000]</span></a>.
+In the simulation, an event is represented by a data structure with at least two fields:</p>
 <ul>
 <li><p><em>Simulation timestamp (integer):</em> at what time moment (in simulation time) it needs to be executed.</p></li>
-<li><p><em>Function to execute:</em> the action which is performed, which can modify state and/or insert future events into the event queue.</p></li>
+<li><p><em>Function to execute:</em> the action which is performed, which can modify state
+and/or insert future events into the event queue.</p></li>
 </ul>
 </li>
-<li><p><strong>Event queue:</strong> a priority queue of events, ordered by the simulation time.</p></li>
-<li><p><strong>Simulation state:</strong> abstraction used by the simulation to model the physical state (definition based on [1]).</p></li>
+<li><p><strong>Event queue:</strong> a priority queue of events, ordered by simulation time.</p></li>
+<li><p><strong>Simulation state:</strong> <em>“abstraction used by the simulation to model the physical state”</em> <a class="reference internal" href="#fujimoto2000" id="id6"><span>[Fujimoto2000]</span></a></p></li>
 </ul>
-<p>[1] Definitions from the book: Parallel and Distributed Simulation Systems. Richard M. Fujimoto.</p>
 </div>
 <div class="section" id="discrete-event-simulation-in-9-lines">
-<h2>Discrete-event simulation in 9 lines<a class="headerlink" href="#discrete-event-simulation-in-9-lines" title="Permalink to this headline">¶</a></h2>
-<p>The mechanism of discrete-event simulation can be condensed to a small piece of pseudo-code:</p>
+<h2>Discrete event simulation in 9 lines<a class="headerlink" href="#discrete-event-simulation-in-9-lines" title="Permalink to this headline">¶</a></h2>
+<p>The mechanism of discrete event simulation can be condensed to a small piece of pseudo-code:</p>
 <div class="highlight-text notranslate"><div class="table-wrapper"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -173,15 +180,18 @@
  }
 </pre></div>
 </td></tr></table></div></div>
-<p>Explanation of each line:</p>
+<p><strong>Explanation of each line:</strong></p>
 <ol class="arabic simple">
 <li><p>The state, which the simulation is centered around.</p></li>
 <li><p>Event queue Q contains events ordered by time, each event has (time T, function to execute (with parameters)).</p></li>
-<li><p>If the event queue is empty, line 5 will just exit immediately. As such, at least one initial event must be scheduled.</p></li>
-<li><p>Initial simulation time is zero (can be any, though zero is generally the only logical one).</p></li>
-<li><p>As long as there events, keep the loop going (of course, it is also possible to make this slightly more sophisticated to have a end time irrespective of whether the are still events scheduled by peeking into the queue.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">Q.pop()</span></code> will return the event with the lowest time T.</p></li>
-<li><p>The simulation hops from event to event.</p></li>
+<li><p>If the event queue is empty, the event loop in line 5 will just exit immediately.
+As such, at least one initial event must be scheduled.</p></li>
+<li><p>Initial simulation time is zero (can technically be any value, though zero is generally the logical initial time).</p></li>
+<li><p>As long as there are events, the loop keeps going. Of course, it is also possible to make this condition slightly
+more sophisticated to have a end time irrespective of whether the are still events scheduled by peeking into the
+queue.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Q.pop()</span></code> will return the event with the lowest simulation timestamp T.</p></li>
+<li><p>The simulation time jumps to the timestamp of the next event.</p></li>
 <li><p>In its execution, a function can insert future events into Q and modify state S.</p></li>
 <li><p>(Closing bracket)</p></li>
 </ol>
@@ -189,18 +199,24 @@
 </div>
 <div class="section" id="example-use-case">
 <h2>Example use case<a class="headerlink" href="#example-use-case" title="Permalink to this headline">¶</a></h2>
-<p>Consider the following example: we have a graph of nodes, and want to answer the question <em>“How long does it take for a message from node 1 to reach node 2?”</em>. Moreover, we want to know afterwards how many messages were forwarded by each node.</p>
+<p>Consider the following example: we have a graph of nodes, and want to answer the question
+<em>“How long does it take for a message from node 1 to reach node 2?”</em>.
+Moreover, we want to know afterwards how many messages were forwarded by each node.</p>
 <p><strong>Topology sketch</strong></p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Node 1 -- (travel time: 204ms) -- Node 0 -- (travel time: 222867ms) -- Node 2
 </pre></div>
 </div>
 <p><strong>Simulation setup and execution walk-through</strong></p>
 <ol class="arabic simple">
-<li><p>Initial state are the nodes. Each node <em>i</em> has a counter of how many packets it has forwarded, initially set to zero for all. Each node knows how to forward.</p></li>
-<li><p>Before the simulation start you insert into the event queue an event that a message M (destination: 2, content: <em>“Hello world!”</em>) arrives at node 1 at t=100ms.</p></li>
+<li><p>Initial state are the nodes. Each node <em>i</em> has a counter of how many packets it has forwarded,
+initially set to zero for all. Each node knows how to forward.</p></li>
+<li><p>Before the simulation start we insert into the event queue an event that a message M
+(destination: 2, content: <em>“Hello world!”</em>) arrives at node 1 at t=100ms.</p></li>
 <li><p>The simulation is started.</p></li>
-<li><p>At t=100ms, node 1 receives M. It knows node 0 is the next hop. It increments its forward counter, and inserts another event into the event queue when message M arrives at node 0 with delay 204ms.</p></li>
-<li><p>At t=304ms, node 0 receives M. It knows node 2 is the next hop. It increments its forward counter, and inserts another event into the event queue when message M arrives at node 2 with delay 222867ms.</p></li>
+<li><p>At t=100ms, node 1 receives M. It knows node 0 is the next hop. It increments its forward counter,
+and inserts another event into the event queue that message M arrives at node 0 with delay 204ms.</p></li>
+<li><p>At t=304ms, node 0 receives M. It knows node 2 is the next hop. It increments its forward counter,
+and inserts another event into the event queue that message M arrives at node 2 with delay 222867ms.</p></li>
 <li><p>At t=223171ms, node 2 receives M. It sees it is the destination and prints the message.</p></li>
 <li><p>There are no other events, so the simulation is ended.</p></li>
 </ol>
@@ -286,37 +302,71 @@ Node 2 forward counter: 0
 </div>
 <div class="section" id="modeling-statements">
 <h2>Modeling statements<a class="headerlink" href="#modeling-statements" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="you-need-initial-events">
-<h3>You need initial events<a class="headerlink" href="#you-need-initial-events" title="Permalink to this headline">¶</a></h3>
-<p>Initially of course you have to insert first event(s) into the event queue Q (else the while loop exits immediately).</p>
+<div class="section" id="initial-events-are-necessary">
+<h3>Initial events are necessary<a class="headerlink" href="#initial-events-are-necessary" title="Permalink to this headline">¶</a></h3>
+<p>Initially of course we have to insert first event(s) into the event queue Q
+(else the while event loop exits immediately).</p>
 </div>
 <div class="section" id="new-events-can-only-be-schedule-in-the-future">
 <h3>New events can only be schedule in the future<a class="headerlink" href="#new-events-can-only-be-schedule-in-the-future" title="Permalink to this headline">¶</a></h3>
-<p>The current simulation time increases (weakly) ascending, as it jumps from one event’s simulation-timestamp to the next’s using the while loop. As such as a hard constraint, it is impossible to insert events with a simulation-timestamp less than the current simulation time.</p>
+<p>The current simulation time increases (weakly) ascending, as it jumps from one event’s
+simulation timestamp to that of the next in the while loop. As such as a hard constraint,
+it is impossible to insert events with a simulation-timestamp less than the current
+simulation time.</p>
 </div>
 <div class="section" id="time-is-discrete-the-current-simulation-time-jumps-to-the-next-event-time">
 <h3>Time is discrete: the current simulation time jumps to the next event time<a class="headerlink" href="#time-is-discrete-the-current-simulation-time-jumps-to-the-next-event-time" title="Permalink to this headline">¶</a></h3>
-<p>In the above example, there was only something executed at t=100ms, t=304ms, and t=223171ms. For instance, at t=50ms nothing was executed, because there was no event scheduled at that time.</p>
+<p>In the above example, there was only something executed at t=100ms, t=304ms, and t=223171ms.
+For instance, at t=50ms nothing was executed, because there was no event scheduled at that time.</p>
 </div>
 <div class="section" id="events-manipulate-state">
 <h3>Events manipulate state<a class="headerlink" href="#events-manipulate-state" title="Permalink to this headline">¶</a></h3>
-<p>Events are there to manipulate state. The insertion of new events is to space out when these state manipulations happen (in other words: the modeling of physical time in simulation time). “State” effectively means “variables which exist during the simulation”. Examples for state are: a counter on a node which for how many packets a node has forwarded, or a queue of packets of which each is waiting for the event which dequeues it.</p>
-<p>If you want to model something which would take time in the physical system, you determine how much simulation time you want it to be, and then insert an event in the future</p>
+<p>Events are there to manipulate state. The insertion of new events is to space out when these
+state manipulations happen (in other words: the modeling of physical time in simulation time).
+“State” effectively means “variables which exist during the simulation”. Examples for state are:
+a counter on a node which for how many packets a node has forwarded, or a queue of packets
+of which each is waiting for the event which dequeues it.</p>
+<p>If we want to model something which would take time in the physical system, we determine
+how much simulation time we want it to last, and then insert an event in the future to handle
+its completion.</p>
 </div>
 <div class="section" id="wallclock-time-can-be-much-longer-than-simulation-time-or-the-other-way-around">
 <h3>Wallclock time can be much longer than simulation time, or the other way around<a class="headerlink" href="#wallclock-time-can-be-much-longer-than-simulation-time-or-the-other-way-around" title="Permalink to this headline">¶</a></h3>
-<p>The above example simulated 223171ms simulation time. However, in wallclock time executing this will literally have taken less than a 1ms. If the event execution’s computations would have been very difficult (let’s say matrix factorization of a billion x billion matrix) it could have also been the other way around.</p>
+<p>The above example simulated 223171ms simulation time. However, in wallclock time executing
+this will literally have taken less than a 1ms. If the event execution’s computations would
+have been very difficult (let’s say matrix factorization of a billion x billion matrix) it
+could have also been the other way around.</p>
 </div>
-<div class="section" id="you-decide-what-part-of-the-physical-system-to-model-in-the-simulation">
-<h3>You decide what part of the physical system to model in the simulation<a class="headerlink" href="#you-decide-what-part-of-the-physical-system-to-model-in-the-simulation" title="Permalink to this headline">¶</a></h3>
-<p>The duration of executing an event in wallclock time can be arbitrarily long, yet no simulation time will pass. For example, instead of having simple pre-calculated constant travel time values, we could also do a very complicated calculation based on many other variables (traffic, type of car, whatever the physical system is).</p>
-<p>Moreover, we can even model the time it takes to decide something. For example, we could model that looking up what the next hop is takes 50ms in simulation time. To accomplish this e.g., we can add an extra method <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">forward_lookup_done(self,</span> <span class="pre">message,</span> <span class="pre">next_hop,</span> <span class="pre">travel_duration)</span></code> and  instead schedule that in the <code class="docutils literal notranslate"><span class="pre">receive</span></code> and have the extra method schedule the <code class="docutils literal notranslate"><span class="pre">receive</span></code> at the next hop.</p>
+<div class="section" id="we-decide-what-part-of-the-physical-system-to-model-in-the-simulation">
+<h3>We decide what part of the physical system to model in the simulation<a class="headerlink" href="#we-decide-what-part-of-the-physical-system-to-model-in-the-simulation" title="Permalink to this headline">¶</a></h3>
+<p>The duration of executing an event in wallclock time can be arbitrarily long, yet no simulation
+time will pass. For example, instead of having simple pre-calculated constant travel time values,
+we could also do a very complicated calculation based on many other variables (traffic, type of car,
+whatever the physical system is).</p>
+<p>Moreover, we can even model the time it takes to decide something. For example, we could model
+that looking up what the next hop is takes 50ms in simulation time. To accomplish this e.g.,
+we can add an extra method <code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">forward_lookup_done(self,</span> <span class="pre">message,</span> <span class="pre">next_hop,</span> <span class="pre">travel_duration)</span></code>
+and  instead schedule that in the <code class="docutils literal notranslate"><span class="pre">receive</span></code> and have the extra method schedule the <code class="docutils literal notranslate"><span class="pre">receive</span></code>
+at the next hop.</p>
 </div>
 <div class="section" id="wallclock-time-physical-time">
 <h3>Wallclock time ≠ physical time<a class="headerlink" href="#wallclock-time-physical-time" title="Permalink to this headline">¶</a></h3>
-<p>The wallclock time is the time it takes to simulate on the computer you are running the simulation on. Generally, this is NOT the physical system you are modeling, and even if it is, the timings can be significantly off as it is only a model (and also, the computer can have other applications running which influence it).</p>
-<p>Using wallclock time to determine simulation time is bad modeling and results in unreproducible experiments and platform dependency</p>
+<p>The wallclock time is the time it takes to simulate on the computer we are running the simulation on.
+Generally, this is NOT the physical system we are modeling, and even if it is, the timings can be
+significantly off as it is only a model. Moreover, there can other external influences that
+affect physical time (e.g., other applications running on the computer).</p>
+<p>Using wallclock time to determine simulation time is arguably bad modeling and results in unreproducible
+experiments and platform dependency. A better solution would be to benchmark the target physical system
+separately, and create models that in turn can be used in the simulation.</p>
 </div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<dl class="citation">
+<dt class="label" id="fujimoto2000"><span class="brackets">Fujimoto2000</span><span class="fn-backref">(<a href="#id1">1</a>,<a href="#id2">2</a>,<a href="#id3">3</a>,<a href="#id4">4</a>,<a href="#id5">5</a>,<a href="#id6">6</a>)</span></dt>
+<dd><p>Fujimoto, Richard M. Parallel and distributed simulation systems. Vol. 300. New York: Wiley, 2000.</p>
+</dd>
+</dl>
 </div>
 </div>
 
@@ -377,19 +427,20 @@ Node 2 forward counter: 0
 <li><a class="reference internal" href="#">What is discrete event simulation?</a><ul>
 <li><a class="reference internal" href="#goal">Goal</a></li>
 <li><a class="reference internal" href="#key-terminology">Key terminology</a></li>
-<li><a class="reference internal" href="#discrete-event-simulation-in-9-lines">Discrete-event simulation in 9 lines</a></li>
+<li><a class="reference internal" href="#discrete-event-simulation-in-9-lines">Discrete event simulation in 9 lines</a></li>
 <li><a class="reference internal" href="#example-use-case">Example use case</a></li>
 <li><a class="reference internal" href="#implementation-of-the-use-case-in-discrevpy">Implementation of the use case in discrevpy</a></li>
 <li><a class="reference internal" href="#modeling-statements">Modeling statements</a><ul>
-<li><a class="reference internal" href="#you-need-initial-events">You need initial events</a></li>
+<li><a class="reference internal" href="#initial-events-are-necessary">Initial events are necessary</a></li>
 <li><a class="reference internal" href="#new-events-can-only-be-schedule-in-the-future">New events can only be schedule in the future</a></li>
 <li><a class="reference internal" href="#time-is-discrete-the-current-simulation-time-jumps-to-the-next-event-time">Time is discrete: the current simulation time jumps to the next event time</a></li>
 <li><a class="reference internal" href="#events-manipulate-state">Events manipulate state</a></li>
 <li><a class="reference internal" href="#wallclock-time-can-be-much-longer-than-simulation-time-or-the-other-way-around">Wallclock time can be much longer than simulation time, or the other way around</a></li>
-<li><a class="reference internal" href="#you-decide-what-part-of-the-physical-system-to-model-in-the-simulation">You decide what part of the physical system to model in the simulation</a></li>
+<li><a class="reference internal" href="#we-decide-what-part-of-the-physical-system-to-model-in-the-simulation">We decide what part of the physical system to model in the simulation</a></li>
 <li><a class="reference internal" href="#wallclock-time-physical-time">Wallclock time ≠ physical time</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
 </ul>

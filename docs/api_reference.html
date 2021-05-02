@@ -2,10 +2,10 @@
 <html class="no-js">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="What is discrete event simulation?" href="what_is_discrete_event_simulation.html" /><link rel="prev" title="Examples" href="examples.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="What is discrete event simulation?" href="what_is_discrete_event_simulation.html" /><link rel="prev" title="Long examples" href="long_examples.html" />
 
     <link rel="shortcut icon" href="_static/favicon_discrevpy.png"/><meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
-        <title>API reference - discrevpy 1.0.2 documentation</title>
+        <title>API reference - discrevpy 1.0.3 documentation</title>
       <link rel="stylesheet" href="_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
     <link rel="stylesheet" href="_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
@@ -86,7 +86,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">discrevpy 1.0.2 documentation</div></a>
+      <a href="index.html"><div class="brand">discrevpy 1.0.3 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
@@ -100,7 +100,7 @@
       <div class="sidebar-sticky"><div class="sidebar-scroll"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">discrevpy 1.0.2 documentation</span>
+  <span class="sidebar-brand-text">discrevpy 1.0.3 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html">
   <input class="sidebar-search" placeholder=Search name="q">
@@ -108,11 +108,13 @@
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="short_examples.html">Short examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="long_examples.html">Long examples</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">API reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="what_is_discrete_event_simulation.html">What is discrete event simulation?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="practical_tips.html">Practical tips</a></li>
 <li class="toctree-l1"><a class="reference internal" href="memory_usage.html">Memory usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy/blob/master/LICENSE">MIT license</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy">GitHub repository</a></li>
 </ul>
@@ -139,7 +141,7 @@ ordered by their scheduled discrete simulation time.</p>
 <dd><p>Discrete event simulator class.</p>
 <dl class="py method">
 <dt id="simulator.Simulator.end">
-<code class="sig-name descname"><span class="pre">end</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/simulator.html#Simulator.end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.end" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">end</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/simulator.html#Simulator.end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.end" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set when the simulator should end even if there are still
 events in the event heap.</p>
 <p>If the delay is zero (or if no delay argument is provided)
@@ -151,136 +153,178 @@ the earliest end time will be the end time. As such, an end()
 call cannot be undone.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>delay</strong> – (Optional; default: 0)
+<dd class="field-odd"><p><strong>delay</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – (Optional; default: 0)
 Delay from current simulation time (now) to end the simulation</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
 <dt id="simulator.Simulator.event_heap_size">
-<code class="sig-name descname"><span class="pre">event_heap_size</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">int</span><a class="reference internal" href="_modules/simulator.html#Simulator.event_heap_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.event_heap_size" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">event_heap_size</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/simulator.html#Simulator.event_heap_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.event_heap_size" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve the current size of the event heap.</p>
 <p>If the simulator is FINISHED and the run ended
 due to an end time having been set (via end()),
 the event heap can still have events in it.
 In INIT state, the event heap size is always zero.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Number of events in the event heap (int)</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Number of events in the event heap</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
 <dt id="simulator.Simulator.is_finished">
-<code class="sig-name descname"><span class="pre">is_finished</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">bool</span><a class="reference internal" href="_modules/simulator.html#Simulator.is_finished"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.is_finished" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check whether the simulator has been run and is finished.
-When the simulator is FINISHED, it is NOT possible to schedule events.
+<code class="sig-name descname"><span class="pre">is_finished</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/simulator.html#Simulator.is_finished"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.is_finished" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether the simulator has been run and as such is in FINISHED state.
+When the simulator is FINISHED, it is not possible to schedule events.
 The simulator can be put into INIT state by calling reset().</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True iff the simulator is FINISHED (bool)</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True iff the simulator is FINISHED</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
 <dt id="simulator.Simulator.is_init">
-<code class="sig-name descname"><span class="pre">is_init</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">bool</span><a class="reference internal" href="_modules/simulator.html#Simulator.is_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.is_init" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check whether the simulator is initialized.
-When the simulator is INIT, it is NOT possible to schedule events.
+<code class="sig-name descname"><span class="pre">is_init</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/simulator.html#Simulator.is_init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.is_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether the simulator is in INIT state.
+When the simulator is INIT, it is not possible to schedule events.
 The simulator can be put into READY state by calling ready().</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True iff the simulator is INIT (bool)</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True iff the simulator is INIT</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
 <dt id="simulator.Simulator.is_ready">
-<code class="sig-name descname"><span class="pre">is_ready</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">bool</span><a class="reference internal" href="_modules/simulator.html#Simulator.is_ready"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.is_ready" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check whether the simulator is ready.
+<code class="sig-name descname"><span class="pre">is_ready</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/simulator.html#Simulator.is_ready"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.is_ready" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether the simulator is in READY state.
 When the simulator is READY, it is possible to schedule events.
 The simulator can be put into RUNNING state by calling run().</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True iff the simulator is READY (bool)</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True iff the simulator is READY</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
 <dt id="simulator.Simulator.is_running">
-<code class="sig-name descname"><span class="pre">is_running</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">bool</span><a class="reference internal" href="_modules/simulator.html#Simulator.is_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.is_running" title="Permalink to this definition">¶</a></dt>
-<dd><p>Check whether the simulator is currently running.
+<code class="sig-name descname"><span class="pre">is_running</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/simulator.html#Simulator.is_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.is_running" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether the simulator is in RUNNING state.
 When the simulator is RUNNING, it is possible to schedule events.
 After the run ends the simulator becomes FINISHED.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>True iff the simulator is RUNNING (bool)</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True iff the simulator is RUNNING</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
 <dt id="simulator.Simulator.now">
-<code class="sig-name descname"><span class="pre">now</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">int</span><a class="reference internal" href="_modules/simulator.html#Simulator.now"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.now" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">now</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/simulator.html#Simulator.now"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.now" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve current simulation time. Before the simulation is run, this will return 0.
 After the simulation is run, it will return the time of the last executed event if there
 was no end time, else it will return the end time.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Current simulation time (int)</p>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Current simulation time</p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
 <dt id="simulator.Simulator.ready">
-<code class="sig-name descname"><span class="pre">ready</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/simulator.html#Simulator.ready"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.ready" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">ready</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/simulator.html#Simulator.ready"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.ready" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ready the simulator such that initial events can be scheduled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt id="simulator.Simulator.reset">
-<code class="sig-name descname"><span class="pre">reset</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/simulator.html#Simulator.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.reset" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">reset</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/simulator.html#Simulator.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reset the simulator such that it can be run again.
-This means current time (now) is set to 0, the event heap
-is emptied and any end time is unset.</p>
+This results in current time (now) being set to 0, the event heap
+being emptied and any end time being unset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt id="simulator.Simulator.run">
-<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/simulator.html#Simulator.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.run" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/simulator.html#Simulator.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run the simulation.</p>
 <p>If there is an end time (specified via end()), the simulation will
-end at that time moment. Else, if there is NO end time specified, the
+end at that time moment. Else, if there is no end time specified, the
 simulation will run until there are no more events.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
 </dd></dl>
 <dl class="py method">
 <dt id="simulator.Simulator.schedule">
-<code class="sig-name descname"><span class="pre">schedule</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">function</span><span class="p"><span class="pre">,</span> </span><span class="pre">method</span><span class="p"><span class="pre">,</span> </span><span class="pre">builtin_function_or_method</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/simulator.html#Simulator.schedule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.schedule" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">schedule</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/simulator.html#Simulator.schedule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.schedule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Schedule an event in the simulation with default priority (0).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>delay</strong> – Delay from current simulation time (now)</p></li>
-<li><p><strong>callback</strong> – Callback: it must be a function or method</p></li>
+<li><p><strong>delay</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Delay from current simulation time (now)</p></li>
+<li><p><strong>callback</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">function</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">method</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">builtin_function_or_method</span></code>]) – Callback: it must be a function or method</p></li>
 <li><p><strong>args</strong> – (Optional) Positional arguments passed to the callback</p></li>
 <li><p><strong>kwargs</strong> – (Optional) Keyword arguments passed to the callback</p></li>
 </ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
 </dd>
 </dl>
 </dd></dl>
 <dl class="py method">
 <dt id="simulator.Simulator.schedule_with_priority">
-<code class="sig-name descname"><span class="pre">schedule_with_priority</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">function</span><span class="p"><span class="pre">,</span> </span><span class="pre">method</span><span class="p"><span class="pre">,</span> </span><span class="pre">builtin_function_or_method</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/simulator.html#Simulator.schedule_with_priority"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.schedule_with_priority" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">schedule_with_priority</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/simulator.html#Simulator.schedule_with_priority"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#simulator.Simulator.schedule_with_priority" title="Permalink to this definition">¶</a></dt>
 <dd><p>Schedule an event in the simulation with a certain priority.</p>
 <p>If there are multiple events in one time moment, the priority determines which goes first.
-The lower the priority, the earlier it is executed in its time moment. If the priority of
-two events is equal, the final arbitration is on which event was scheduled first.</p>
+The lower the priority, the earlier it is executed in its time moment. If the priorities of
+two events are equal, the final arbitration is based on which event was scheduled first.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>delay</strong> – Delay from current simulation time (now)</p></li>
-<li><p><strong>priority</strong> – Priority</p></li>
-<li><p><strong>callback</strong> – Callback: it must be a function or method</p></li>
+<li><p><strong>delay</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Delay from current simulation time (now)</p></li>
+<li><p><strong>priority</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – Priority</p></li>
+<li><p><strong>callback</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">function</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">method</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">builtin_function_or_method</span></code>]) – Callback: it must be a function or method</p></li>
 <li><p><strong>args</strong> – (Optional) Positional arguments passed to the callback</p></li>
 <li><p><strong>kwargs</strong> – (Optional) Keyword arguments passed to the callback</p></li>
 </ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
 </dd>
 </dl>
 </dd></dl>
@@ -300,14 +344,14 @@ two events is equal, the final arbitration is on which event was scheduled first
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="examples.html">
+          <a class="prev-page" href="long_examples.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Examples</div>
+                <div class="title">Long examples</div>
                 
               </div>
             </a>

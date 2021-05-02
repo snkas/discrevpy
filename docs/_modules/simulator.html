@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <link rel="shortcut icon" href="../_static/favicon_discrevpy.png"/><meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
-        <title>simulator - discrevpy 1.0.2 documentation</title>
+        <title>simulator - discrevpy 1.0.3 documentation</title>
       <link rel="stylesheet" href="../_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
     <link rel="stylesheet" href="../_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="../_static/pygments_dark.css">
@@ -86,7 +86,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">discrevpy 1.0.2 documentation</div></a>
+      <a href="../index.html"><div class="brand">discrevpy 1.0.3 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
@@ -100,7 +100,7 @@
       <div class="sidebar-sticky"><div class="sidebar-scroll"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">discrevpy 1.0.2 documentation</span>
+  <span class="sidebar-brand-text">discrevpy 1.0.3 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html">
   <input class="sidebar-search" placeholder=Search name="q">
@@ -108,11 +108,13 @@
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-tree">
   <ul>
-<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../short_examples.html">Short examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../long_examples.html">Long examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../api_reference.html">API reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../what_is_discrete_event_simulation.html">What is discrete event simulation?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../practical_tips.html">Practical tips</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../memory_usage.html">Memory usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy/blob/master/LICENSE">MIT license</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy">GitHub repository</a></li>
 </ul>
@@ -194,14 +196,14 @@
 <span class="sd">        Ready the simulator such that initial events can be scheduled.</span>
 <span class="sd">        """</span>
 
-        <span class="c1"># Simulator must be in initialized state</span>
+        <span class="c1"># Simulator must be in INIT state</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">!=</span> <span class="n">Simulator</span><span class="o">.</span><span class="n">_State</span><span class="o">.</span><span class="n">INIT</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">"Can only become READY when the simulator is INIT "</span>
                 <span class="s2">"(current: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__state</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">")"</span>
             <span class="p">)</span>
 
-        <span class="c1"># Proceed to ready state</span>
+        <span class="c1"># Proceed to READY state</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">=</span> <span class="n">Simulator</span><span class="o">.</span><span class="n">_State</span><span class="o">.</span><span class="n">READY</span></div>
 
 <div class="viewcode-block" id="Simulator.end"><a class="viewcode-back" href="../api_reference.html#simulator.Simulator.end">[docs]</a>    <span class="k">def</span> <span class="nf">end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delay</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -222,7 +224,7 @@
 <span class="sd">                         Delay from current simulation time (now) to end the simulation</span>
 <span class="sd">        """</span>
 
-        <span class="c1"># Simulator must be in either ready or running state</span>
+        <span class="c1"># Simulator must be in either READY or RUNNING state</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">!=</span> <span class="n">Simulator</span><span class="o">.</span><span class="n">_State</span><span class="o">.</span><span class="n">READY</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">!=</span> <span class="n">Simulator</span><span class="o">.</span><span class="n">_State</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">"Scheduling end can only be done when the state is READY or RUNNING "</span>
@@ -298,8 +300,8 @@
 <span class="sd">        Schedule an event in the simulation with a certain priority.</span>
 
 <span class="sd">        If there are multiple events in one time moment, the priority determines which goes first.</span>
-<span class="sd">        The lower the priority, the earlier it is executed in its time moment. If the priority of</span>
-<span class="sd">        two events is equal, the final arbitration is on which event was scheduled first.</span>
+<span class="sd">        The lower the priority, the earlier it is executed in its time moment. If the priorities of</span>
+<span class="sd">        two events are equal, the final arbitration is based on which event was scheduled first.</span>
 
 <span class="sd">        :param delay:       Delay from current simulation time (now)</span>
 <span class="sd">        :param priority:    Priority</span>
@@ -308,7 +310,7 @@
 <span class="sd">        :param kwargs:      (Optional) Keyword arguments passed to the callback</span>
 <span class="sd">        """</span>
 
-        <span class="c1"># Simulator must be in either ready or running state</span>
+        <span class="c1"># Simulator must be in either READY or RUNNING state</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">!=</span> <span class="n">Simulator</span><span class="o">.</span><span class="n">_State</span><span class="o">.</span><span class="n">READY</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">!=</span> <span class="n">Simulator</span><span class="o">.</span><span class="n">_State</span><span class="o">.</span><span class="n">RUNNING</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">"Scheduling can only be done when the state is READY or RUNNING "</span>
@@ -352,18 +354,18 @@
 <span class="sd">        Run the simulation.</span>
 
 <span class="sd">        If there is an end time (specified via end()), the simulation will</span>
-<span class="sd">        end at that time moment. Else, if there is NO end time specified, the</span>
+<span class="sd">        end at that time moment. Else, if there is no end time specified, the</span>
 <span class="sd">        simulation will run until there are no more events.</span>
 <span class="sd">        """</span>
 
-        <span class="c1"># Simulator must be in ready state</span>
+        <span class="c1"># Simulator must be in READY state</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">!=</span> <span class="n">Simulator</span><span class="o">.</span><span class="n">_State</span><span class="o">.</span><span class="n">READY</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">"Run can only be started when the state is READY "</span>
                 <span class="s2">"(current: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__state</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">")"</span>
             <span class="p">)</span>
 
-        <span class="c1"># Now it is running</span>
+        <span class="c1"># Now it is in RUNNING state</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">=</span> <span class="n">Simulator</span><span class="o">.</span><span class="n">_State</span><span class="o">.</span><span class="n">RUNNING</span>
 
         <span class="c1"># Event loop</span>
@@ -385,11 +387,11 @@
 <div class="viewcode-block" id="Simulator.reset"><a class="viewcode-back" href="../api_reference.html#simulator.Simulator.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">"""</span>
 <span class="sd">        Reset the simulator such that it can be run again.</span>
-<span class="sd">        This means current time (now) is set to 0, the event heap</span>
-<span class="sd">        is emptied and any end time is unset.</span>
+<span class="sd">        This results in current time (now) being set to 0, the event heap</span>
+<span class="sd">        being emptied and any end time being unset.</span>
 <span class="sd">        """</span>
 
-        <span class="c1"># Simulator must be in finished state</span>
+        <span class="c1"># Simulator must be in FINISHED state</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">!=</span> <span class="n">Simulator</span><span class="o">.</span><span class="n">_State</span><span class="o">.</span><span class="n">FINISHED</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                 <span class="s2">"Reset can only be performed when the state is FINISHED "</span>
@@ -410,47 +412,47 @@
 <span class="sd">        After the simulation is run, it will return the time of the last executed event if there</span>
 <span class="sd">        was no end time, else it will return the end time.</span>
 
-<span class="sd">        :return: Current simulation time (int)</span>
+<span class="sd">        :return: Current simulation time</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__now</span></div>
 
 <div class="viewcode-block" id="Simulator.is_init"><a class="viewcode-back" href="../api_reference.html#simulator.Simulator.is_init">[docs]</a>    <span class="k">def</span> <span class="nf">is_init</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">"""</span>
-<span class="sd">        Check whether the simulator is initialized.</span>
-<span class="sd">        When the simulator is INIT, it is NOT possible to schedule events.</span>
+<span class="sd">        Check whether the simulator is in INIT state.</span>
+<span class="sd">        When the simulator is INIT, it is not possible to schedule events.</span>
 <span class="sd">        The simulator can be put into READY state by calling ready().</span>
 
-<span class="sd">        :return: True iff the simulator is INIT (bool)</span>
+<span class="sd">        :return: True iff the simulator is INIT</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">==</span> <span class="n">Simulator</span><span class="o">.</span><span class="n">_State</span><span class="o">.</span><span class="n">INIT</span></div>
 
 <div class="viewcode-block" id="Simulator.is_ready"><a class="viewcode-back" href="../api_reference.html#simulator.Simulator.is_ready">[docs]</a>    <span class="k">def</span> <span class="nf">is_ready</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">"""</span>
-<span class="sd">        Check whether the simulator is ready.</span>
+<span class="sd">        Check whether the simulator is in READY state.</span>
 <span class="sd">        When the simulator is READY, it is possible to schedule events.</span>
 <span class="sd">        The simulator can be put into RUNNING state by calling run().</span>
 
-<span class="sd">        :return: True iff the simulator is READY (bool)</span>
+<span class="sd">        :return: True iff the simulator is READY</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">==</span> <span class="n">Simulator</span><span class="o">.</span><span class="n">_State</span><span class="o">.</span><span class="n">READY</span></div>
 
 <div class="viewcode-block" id="Simulator.is_running"><a class="viewcode-back" href="../api_reference.html#simulator.Simulator.is_running">[docs]</a>    <span class="k">def</span> <span class="nf">is_running</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">"""</span>
-<span class="sd">        Check whether the simulator is currently running.</span>
+<span class="sd">        Check whether the simulator is in RUNNING state.</span>
 <span class="sd">        When the simulator is RUNNING, it is possible to schedule events.</span>
 <span class="sd">        After the run ends the simulator becomes FINISHED.</span>
 
-<span class="sd">        :return: True iff the simulator is RUNNING (bool)</span>
+<span class="sd">        :return: True iff the simulator is RUNNING</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">==</span> <span class="n">Simulator</span><span class="o">.</span><span class="n">_State</span><span class="o">.</span><span class="n">RUNNING</span></div>
 
 <div class="viewcode-block" id="Simulator.is_finished"><a class="viewcode-back" href="../api_reference.html#simulator.Simulator.is_finished">[docs]</a>    <span class="k">def</span> <span class="nf">is_finished</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">"""</span>
-<span class="sd">        Check whether the simulator has been run and is finished.</span>
-<span class="sd">        When the simulator is FINISHED, it is NOT possible to schedule events.</span>
+<span class="sd">        Check whether the simulator has been run and as such is in FINISHED state.</span>
+<span class="sd">        When the simulator is FINISHED, it is not possible to schedule events.</span>
 <span class="sd">        The simulator can be put into INIT state by calling reset().</span>
 
-<span class="sd">        :return: True iff the simulator is FINISHED (bool)</span>
+<span class="sd">        :return: True iff the simulator is FINISHED</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__state</span> <span class="o">==</span> <span class="n">Simulator</span><span class="o">.</span><span class="n">_State</span><span class="o">.</span><span class="n">FINISHED</span></div>
 
@@ -463,7 +465,7 @@
 <span class="sd">        the event heap can still have events in it.</span>
 <span class="sd">        In INIT state, the event heap size is always zero.</span>
 
-<span class="sd">        :return: Number of events in the event heap (int)</span>
+<span class="sd">        :return: Number of events in the event heap</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__event_heap</span><span class="p">)</span></div></div>
 

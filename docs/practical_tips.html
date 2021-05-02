@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Memory usage" href="memory_usage.html" /><link rel="prev" title="What is discrete event simulation?" href="what_is_discrete_event_simulation.html" />
 
     <link rel="shortcut icon" href="_static/favicon_discrevpy.png"/><meta name="generator" content="sphinx-3.5.4, furo 2021.04.11.beta34"/>
-        <title>Practical tips - discrevpy 1.0.2 documentation</title>
+        <title>Practical tips - discrevpy 1.0.3 documentation</title>
       <link rel="stylesheet" href="_static/styles/furo.css?digest=59ab60ac09ea94ccfe6deddff6d715cce948a6fc">
     <link rel="stylesheet" href="_static/pygments.css">
     <link media="(prefers-color-scheme: dark)" rel="stylesheet" href="_static/pygments_dark.css">
@@ -86,7 +86,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">discrevpy 1.0.2 documentation</div></a>
+      <a href="index.html"><div class="brand">discrevpy 1.0.3 documentation</div></a>
     </div>
     <div class="header-right">
       <label class="toc-overlay-icon toc-header-icon" for="__toc">
@@ -100,7 +100,7 @@
       <div class="sidebar-sticky"><div class="sidebar-scroll"><a class="sidebar-brand" href="index.html">
   
   
-  <span class="sidebar-brand-text">discrevpy 1.0.2 documentation</span>
+  <span class="sidebar-brand-text">discrevpy 1.0.3 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html">
   <input class="sidebar-search" placeholder=Search name="q">
@@ -108,11 +108,13 @@
   <input type="hidden" name="area" value="default">
 </form><div class="sidebar-tree">
   <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="short_examples.html">Short examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="long_examples.html">Long examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api_reference.html">API reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="what_is_discrete_event_simulation.html">What is discrete event simulation?</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Practical tips</a></li>
 <li class="toctree-l1"><a class="reference internal" href="memory_usage.html">Memory usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy/blob/master/LICENSE">MIT license</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/snkas/discrevpy">GitHub repository</a></li>
 </ul>
@@ -130,39 +132,76 @@
         </label>
         <div class="section" id="practical-tips">
 <h1>Practical tips<a class="headerlink" href="#practical-tips" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="event-execution-is-generally-the-bottleneck-keep-it-o-1-or-o-log-n">
-<h2>Event execution is generally the bottleneck: keep it O(1) or O(log n)<a class="headerlink" href="#event-execution-is-generally-the-bottleneck-keep-it-o-1-or-o-log-n" title="Permalink to this headline">¶</a></h2>
-<p>Generally, insertion of new events into the event queue is not the bottleneck. Rather the time it takes to execute the events is the more likely dominant time factor. In an event execution, you can of course do any computation you want. This almost always consists of events modifying state, which consists of data structures whose functions have time complexity (e.g., memory allocation, queue insertion, passing of events).</p>
-<p>An event type with a slow runtime which is often inserted/executed can slow down your simulation significantly. E.g., if you have the arrival of packets into a queue of 100000 elements, make sure the queue insertion is O(1) or O(log n) at worse. Discrete-event simulation is not magic, it is only the simulation of time.</p>
+<div class="section" id="speed-up-event-execution-the-most-likely-bottleneck">
+<h2>Speed up event execution: the most likely bottleneck<a class="headerlink" href="#speed-up-event-execution-the-most-likely-bottleneck" title="Permalink to this headline">¶</a></h2>
+<p>Generally, insertion of new events into the event queue is not the bottleneck.
+Rather the time it takes to execute the events is the more likely dominant time factor.
+In an event execution, any arbitrary computation can be done. However, although
+simulation time does not progress within the event’s execution, wallclock time does
+– which in the end we use to ascribe a simulation “being slow”. As such, any
+algorithm or data structure interaction performed in an event execution should
+have its time complexity thoughtfully considered.</p>
+<ul>
+<li><p><strong>Strive for O(1) or O(log n) time complexity</strong></p>
+<p>An event type with a slow runtime (especially if frequently inserted/executed) can
+slow down a simulation significantly. For instance, if there is an arrival
+of packets into a queue of 100000 elements, it is prudent that the queue insertion
+is O(1) or O(log n) at worse.  Similarly, allocating or deallocating large amounts
+of memory can be time consuming. Discrete event simulation is not magic, it is
+merely the simulation of time.</p>
+</li>
+<li><p><strong>Pre-process/pre-calculate as much as possible</strong></p>
+<p>If there are values which can be calculated beforehand which are independent of the
+simulation outcome itself, it is often worthwhile to separately generate these
+and load them in at the start of each run. For example, if the simulation involves
+shortest path routing over a graph, one can calculate the routing state in advance
+(e.g., using Floyd-Warshall). Depending on the task, the pre-calculation might possibly be
+parallelizable over many machines, or could be done with a more convenient framework
+or programming language (with e.g., better libraries available or hardware acceleration).</p>
+</li>
+</ul>
 </div>
-<div class="section" id="however-also-do-not-fill-up-the-event-queue-unnecessarily">
-<h2>However: also do not fill up the event queue unnecessarily<a class="headerlink" href="#however-also-do-not-fill-up-the-event-queue-unnecessarily" title="Permalink to this headline">¶</a></h2>
-<p>Of course, insert events only if it is absolutely necessary. If you blow up your event queue to 1’000’000+ events, the O(log n) insertion for each new event is still going to slow you down.</p>
-<p><strong>The following guidelines should be followed:</strong></p>
-<div class="section" id="do-not-pre-plan-all-events-of-a-process-which-is-regenerative">
-<h3>Do not pre-plan all events of a process which is regenerative<a class="headerlink" href="#do-not-pre-plan-all-events-of-a-process-which-is-regenerative" title="Permalink to this headline">¶</a></h3>
-<p>Example: let’s say every 10ms you want to send a message from A to B. Don’t insert for the entire duration of the simulation (e.g., 100s) all events (e.g., 10000) but instead insert one, which then at the end of its execution inserts the next one 10ms from then.</p>
-</div>
-<div class="section" id="be-wary-of-inserting-a-far-in-the-future-event-for-a-thing-which-occurs-often">
-<h3>Be wary of inserting a far-in-the-future event for a thing which occurs often<a class="headerlink" href="#be-wary-of-inserting-a-far-in-the-future-event-for-a-thing-which-occurs-often" title="Permalink to this headline">¶</a></h3>
-<p>If you insert 100’000 events, each of which is scheduled for 1 ms then they only interfere for that 1 ms. If they are schedule for 1000 s, then they increase event insertion duration for the simulation of those whole thousand seconds.</p>
-</div>
-<div class="section" id="group-events-if-the-model-accuracy-loss-is-acceptable">
-<h3>Group events if the model accuracy loss is acceptable<a class="headerlink" href="#group-events-if-the-model-accuracy-loss-is-acceptable" title="Permalink to this headline">¶</a></h3>
-<p>It might be that many events actually happen at slightly different times, but that with some loss of model accuracy, you can group them. You do this by maintaining a list of the things that happened in that time interval, and then having a regenerative event in a time interval (e.g., 10ms) which goes over the list. It’s like the efficiency of garbage collection in Java (process in batches).</p>
-</div>
-<div class="section" id="if-you-can-leave-it-to-post-processing">
-<h3>If you can, leave it to post-processing<a class="headerlink" href="#if-you-can-leave-it-to-post-processing" title="Permalink to this headline">¶</a></h3>
-<p>You can always save things in state and then later on process them. This is especially true for collection of logs or statistics: don’t for each thing you log something for insert an event at the end of the simulation which processes the logs, but instead keep it in state and save a list of the things. Then in post-processing after the simulation go over the list.</p>
-</div>
-<div class="section" id="be-careful-of-events-generating-events-spiraling-out-of-control">
-<h3>Be careful of events generating events spiraling out of control<a class="headerlink" href="#be-careful-of-events-generating-events-spiraling-out-of-control" title="Permalink to this headline">¶</a></h3>
-<p>Events creating other events is the key concept of discrete event simulation. However, be aware that this does not spiral out of control, don’t insert insert new events continuously at a small future time scale. This can event accidentally: zero is a valid future time, indicating it needs to be execute in the same time step as the event being executed right now. An integer division of int a = 10 / 100 will round to a = 0. Discrete event simulation also happens at fixed time granularity, so even if you set an event to 0.3 nanoseconds in the future, if the granularity is 1 nanosecond, the event will either be 0 or 1 ns in the future.</p>
-</div>
-</div>
-<div class="section" id="pre-process-pre-calculate-as-much-as-possible">
-<h2>Pre-process/pre-calculate as much as possible<a class="headerlink" href="#pre-process-pre-calculate-as-much-as-possible" title="Permalink to this headline">¶</a></h2>
-<p>If you have values which you can calculate beforehand which remain the same for each experimental run, it might be worthwhile to pre-calculate these, and then read in the pre-calculated values from file at the start of each run. Depending on the task, the pre-calculation you might want to do on many machines or in a more convenient programming language (with e.g., better libraries available or hardware acceleration).</p>
+<div class="section" id="regulate-event-queue-size">
+<h2>Regulate event queue size<a class="headerlink" href="#regulate-event-queue-size" title="Permalink to this headline">¶</a></h2>
+<p>Insertion into the event queue is O(log n), and as such is likely not the bottleneck.
+Of course, if the event queue becomes increasingly large, e.g., reaching 1’000’000 or more events,
+it can become a substantial overhead. Irrespective of whether it is event execution or event insertion
+which is the dominant time factor, the key mantra is the same: <strong>only insert events if it is necessary.</strong></p>
+<ul>
+<li><p><strong>Do not pre-plan all events of a process which is regenerative</strong></p>
+<p>For instance, suppose every 1ms a message from A to B is sent. Don’t insert for the entire
+duration of the simulation (e.g., 100s) all events (e.g., 100’000) but instead insert one, which
+at the end of its execution inserts the next one 1ms in the future.</p>
+</li>
+<li><p><strong>Be wary of inserting many far-in-the-future events</strong></p>
+<p>For example, if there are 200’000 events occurring at t=100s, and they are scheduled at the start of the
+simulation, then for the entire simulation time interval of [0, 100s), insertion into the event queue will be slow.
+If it is possible, one could group these 200’000 events together by scheduling a single event at t=99s which only
+at that moment schedules the 200’000 events.</p>
+</li>
+<li><p><strong>Group or aggregate events if the model accuracy loss (if any) is acceptable</strong></p>
+<p>It might be too time consuming to update the state at the finest time granularity desirable.
+At the cost of model accuracy, one can instead operate at coarser time granularity, possibly
+grouping together or aggregating the changes that occurred. For example, one can have
+a regenerative event in a simulation time interval (e.g., 10ms) that applies the changes in batch.</p>
+</li>
+<li><p><strong>Leave as much as possible to post-processing</strong></p>
+<p>One can always save data in memory and after the simulation is run process them. This is especially true for the
+collection of logs or statistics. In post-processing, one can go over the stored data in a manner more efficient
+(e.g., parallelized over many machines) or convenient (e.g., using another framework or programming language).</p>
+</li>
+<li><p><strong>Be careful of events generating events spiraling out of control</strong></p>
+<p>Events creating other events is a key concept of discrete event simulation. However, be aware that
+this does not spiral out of control: it is not recommended to insert new events continuously at a very
+small future time scale. This can even occur accidentally: zero is a valid future time, indicating
+it needs to be execute in the same time step as the event being executed right now. One might use
+an integer division (e.g., <code class="docutils literal notranslate"><span class="pre">d</span> <span class="pre">=</span> <span class="pre">10</span> <span class="pre">//</span> <span class="pre">100</span></code>) (or floor operation) to calculate delay, which will round down to zero
+– thus if it always schedules itself again in the future this can lead to an infinite loop as
+simulation time never progresses. Discrete event simulation time has a fixed time granularity (known in advance):
+if the granularity is 1 nanosecond then it is impossible to schedule an event 0.3 nanoseconds in the future:
+it must be either 0 or 1 ns.</p>
+</li>
+</ul>
 </div>
 </div>
 
@@ -221,16 +260,8 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Practical tips</a><ul>
-<li><a class="reference internal" href="#event-execution-is-generally-the-bottleneck-keep-it-o-1-or-o-log-n">Event execution is generally the bottleneck: keep it O(1) or O(log n)</a></li>
-<li><a class="reference internal" href="#however-also-do-not-fill-up-the-event-queue-unnecessarily">However: also do not fill up the event queue unnecessarily</a><ul>
-<li><a class="reference internal" href="#do-not-pre-plan-all-events-of-a-process-which-is-regenerative">Do not pre-plan all events of a process which is regenerative</a></li>
-<li><a class="reference internal" href="#be-wary-of-inserting-a-far-in-the-future-event-for-a-thing-which-occurs-often">Be wary of inserting a far-in-the-future event for a thing which occurs often</a></li>
-<li><a class="reference internal" href="#group-events-if-the-model-accuracy-loss-is-acceptable">Group events if the model accuracy loss is acceptable</a></li>
-<li><a class="reference internal" href="#if-you-can-leave-it-to-post-processing">If you can, leave it to post-processing</a></li>
-<li><a class="reference internal" href="#be-careful-of-events-generating-events-spiraling-out-of-control">Be careful of events generating events spiraling out of control</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#pre-process-pre-calculate-as-much-as-possible">Pre-process/pre-calculate as much as possible</a></li>
+<li><a class="reference internal" href="#speed-up-event-execution-the-most-likely-bottleneck">Speed up event execution: the most likely bottleneck</a></li>
+<li><a class="reference internal" href="#regulate-event-queue-size">Regulate event queue size</a></li>
 </ul>
 </li>
 </ul>

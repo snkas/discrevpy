@@ -11,11 +11,33 @@ discrevpy: minimalist discrete event simulator
 
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
    :alt: license: MIT
-   :target: https://opensource.org/licenses/MIT
+   :target: https://github.com/snkas/discrevpy/blob/master/LICENSE
+
+.. image:: https://img.shields.io/github/v/release/snkas/discrevpy
+   :alt: GitHub release version
+   :target: https://github.com/snkas/discrevpy/releases
+
+.. image:: https://img.shields.io/pypi/v/discrevpy?color=blue
+   :alt: PyPI version
+   :target: https://pypi.org/project/discrevpy/
 
 **discrevpy** is a minimalist discrete event simulator in Python. It makes use of function/method
 callbacks in its event execution. The discrevpy simulator does not implement any message passing
 and is thus exclusively single-threaded.
+
+.. toctree::
+   short_examples
+   long_examples
+   api_reference
+   what_is_discrete_event_simulation
+   practical_tips
+   memory_usage
+   development
+   MIT license <https://github.com/snkas/discrevpy/blob/master/LICENSE>
+   GitHub repository <https://github.com/snkas/discrevpy>
+   :hidden:
+   :name: title
+   :maxdepth: 2
 
 
 Installation
@@ -49,23 +71,15 @@ Getting started
 
 **Next steps:**
 
-* :doc:`View more examples <examples>`
+* :doc:`View some short examples <short_examples>`
+* :doc:`View more in-depth longer examples <long_examples>`
 * :doc:`Explore the API <api_reference>`
 * :doc:`Learn more about discrete event simulation <what_is_discrete_event_simulation>`
 * :doc:`Read some tips to help you speed up your simulations <practical_tips>`
 * :doc:`Understand better the memory usage overhead of discrevpy <memory_usage>`
 
+**Development:**
 
-Documentation
----------------
-
-.. toctree::
-   examples
-   api_reference
-   what_is_discrete_event_simulation
-   practical_tips
-   memory_usage
-   MIT license <https://github.com/snkas/discrevpy/blob/master/LICENSE>
-   GitHub repository <https://github.com/snkas/discrevpy>
-   :name: title
-   :maxdepth: 2
+* :doc:`Read the module development instructions <development>`
+* `Browse the GitHub repository <https://github.com/snkas/discrevpy>`_
+* `View the MIT license <https://github.com/snkas/discrevpy/blob/master/LICENSE>`_

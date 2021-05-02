@@ -4,35 +4,39 @@ What is discrete event simulation?
 Goal
 ----
 
-You want to simulate a real physical system. The first idea would be to calculate what the system does at a fixed time step, however at a small time step this would take too long and potentially many of the steps will have nothing happening. As such, we make use of discrete event simulation. In discrete event simulation, you only do something if there is something meaningful: an event occurs. The simulation hops from event to event, and simulation time progresses as such.
+The goal is to simulate a real physical system to gain insight how it would perform.
+Instead of updating system state at a fixed time step, in discrete event simulation
+it only updates when there is something meaningful occurring: an event [Fujimoto2000]_.
+The simulation jumps from one event to the next, and simulation time is incremented by
+the time gap between subsequent events.
 
 
 Key terminology
 ---------------
 
-* **Physical time:** time in the physical system (definition from [1]).
+* **Physical time:** *"time in the physical system"* [Fujimoto2000]_
 
-* **Simulation time:** abstraction used by the simulation to model physical time (definition from [1]).
+* **Simulation time:** *"abstraction used by the simulation to model physical time"* [Fujimoto2000]_
 
-* **Wallclock time:** time during the execution of the simulation program (definition from [1]).
+* **Wallclock time:** *"time during the execution of the simulation program"* [Fujimoto2000]_
 
-* **Event:** something occurs at a certain point in time. In the simulation, an event is represented by a data structure with at least two fields:
+* **Event:** something occurs at a certain point in time [Fujimoto2000]_.
+  In the simulation, an event is represented by a data structure with at least two fields:
 
   * *Simulation timestamp (integer):* at what time moment (in simulation time) it needs to be executed.
 
-  * *Function to execute:* the action which is performed, which can modify state and/or insert future events into the event queue.
+  * *Function to execute:* the action which is performed, which can modify state
+    and/or insert future events into the event queue.
 
-* **Event queue:** a priority queue of events, ordered by the simulation time.
+* **Event queue:** a priority queue of events, ordered by simulation time.
 
-* **Simulation state:** abstraction used by the simulation to model the physical state (definition based on [1]).
-
-[1] Definitions from the book: Parallel and Distributed Simulation Systems. Richard M. Fujimoto.
+* **Simulation state:** *"abstraction used by the simulation to model the physical state"* [Fujimoto2000]_
 
 
-Discrete-event simulation in 9 lines
+Discrete event simulation in 9 lines
 ------------------------------------
 
-The mechanism of discrete-event simulation can be condensed to a small piece of pseudo-code:
+The mechanism of discrete event simulation can be condensed to a small piece of pseudo-code:
 
 .. code-block:: text
    :linenos:
@@ -47,15 +51,18 @@ The mechanism of discrete-event simulation can be condensed to a small piece of 
         next_event.execute()
     }
 
-Explanation of each line:
+**Explanation of each line:**
 
 1. The state, which the simulation is centered around.
 2. Event queue Q contains events ordered by time, each event has (time T, function to execute (with parameters)).
-3. If the event queue is empty, line 5 will just exit immediately. As such, at least one initial event must be scheduled.
-4. Initial simulation time is zero (can be any, though zero is generally the only logical one).
-5. As long as there events, keep the loop going (of course, it is also possible to make this slightly more sophisticated to have a end time irrespective of whether the are still events scheduled by peeking into the queue.
-6. The ``Q.pop()`` will return the event with the lowest time T.
-7. The simulation hops from event to event.
+3. If the event queue is empty, the event loop in line 5 will just exit immediately.
+   As such, at least one initial event must be scheduled.
+4. Initial simulation time is zero (can technically be any value, though zero is generally the logical initial time).
+5. As long as there are events, the loop keeps going. Of course, it is also possible to make this condition slightly
+   more sophisticated to have a end time irrespective of whether the are still events scheduled by peeking into the
+   queue.
+6. The ``Q.pop()`` will return the event with the lowest simulation timestamp T.
+7. The simulation time jumps to the timestamp of the next event.
 8. In its execution, a function can insert future events into Q and modify state S.
 9. (Closing bracket)
 
@@ -65,7 +72,9 @@ The discrevpy simulator resembles the above pseudo-code quite closely.
 Example use case
 ----------------
 
-Consider the following example: we have a graph of nodes, and want to answer the question *"How long does it take for a message from node 1 to reach node 2?"*. Moreover, we want to know afterwards how many messages were forwarded by each node.
+Consider the following example: we have a graph of nodes, and want to answer the question
+*"How long does it take for a message from node 1 to reach node 2?"*.
+Moreover, we want to know afterwards how many messages were forwarded by each node.
 
 **Topology sketch**
 
@@ -75,15 +84,19 @@ Consider the following example: we have a graph of nodes, and want to answer the
 
 **Simulation setup and execution walk-through**
 
-1. Initial state are the nodes. Each node *i* has a counter of how many packets it has forwarded, initially set to zero for all. Each node knows how to forward.
+1. Initial state are the nodes. Each node *i* has a counter of how many packets it has forwarded,
+   initially set to zero for all. Each node knows how to forward.
 
-2. Before the simulation start you insert into the event queue an event that a message M (destination: 2, content: *"Hello world!"*) arrives at node 1 at t=100ms.
+2. Before the simulation start we insert into the event queue an event that a message M
+   (destination: 2, content: *"Hello world!"*) arrives at node 1 at t=100ms.
 
 3. The simulation is started.
 
-4. At t=100ms, node 1 receives M. It knows node 0 is the next hop. It increments its forward counter, and inserts another event into the event queue when message M arrives at node 0 with delay 204ms.
+4. At t=100ms, node 1 receives M. It knows node 0 is the next hop. It increments its forward counter,
+   and inserts another event into the event queue that message M arrives at node 0 with delay 204ms.
 
-5. At t=304ms, node 0 receives M. It knows node 2 is the next hop. It increments its forward counter, and inserts another event into the event queue when message M arrives at node 2 with delay 222867ms.
+5. At t=304ms, node 0 receives M. It knows node 2 is the next hop. It increments its forward counter,
+   and inserts another event into the event queue that message M arrives at node 2 with delay 222867ms.
 
 6. At t=223171ms, node 2 receives M. It sees it is the destination and prints the message.
 
@@ -179,49 +192,80 @@ Modeling statements
 -------------------
 
 
-You need initial events
-^^^^^^^^^^^^^^^^^^^^^^^
+Initial events are necessary
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Initially of course you have to insert first event(s) into the event queue Q (else the while loop exits immediately).
+Initially of course we have to insert first event(s) into the event queue Q
+(else the while event loop exits immediately).
 
 
 New events can only be schedule in the future
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The current simulation time increases (weakly) ascending, as it jumps from one event's simulation-timestamp to the next's using the while loop. As such as a hard constraint, it is impossible to insert events with a simulation-timestamp less than the current simulation time.
+The current simulation time increases (weakly) ascending, as it jumps from one event's
+simulation timestamp to that of the next in the while loop. As such as a hard constraint,
+it is impossible to insert events with a simulation-timestamp less than the current
+simulation time.
 
 
 Time is discrete: the current simulation time jumps to the next event time
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In the above example, there was only something executed at t=100ms, t=304ms, and t=223171ms. For instance, at t=50ms nothing was executed, because there was no event scheduled at that time.
+In the above example, there was only something executed at t=100ms, t=304ms, and t=223171ms.
+For instance, at t=50ms nothing was executed, because there was no event scheduled at that time.
 
 
 Events manipulate state
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Events are there to manipulate state. The insertion of new events is to space out when these state manipulations happen (in other words: the modeling of physical time in simulation time). "State" effectively means "variables which exist during the simulation". Examples for state are: a counter on a node which for how many packets a node has forwarded, or a queue of packets of which each is waiting for the event which dequeues it.
+Events are there to manipulate state. The insertion of new events is to space out when these
+state manipulations happen (in other words: the modeling of physical time in simulation time).
+"State" effectively means "variables which exist during the simulation". Examples for state are:
+a counter on a node which for how many packets a node has forwarded, or a queue of packets
+of which each is waiting for the event which dequeues it.
 
-If you want to model something which would take time in the physical system, you determine how much simulation time you want it to be, and then insert an event in the future
+If we want to model something which would take time in the physical system, we determine
+how much simulation time we want it to last, and then insert an event in the future to handle
+its completion.
 
 
 Wallclock time can be much longer than simulation time, or the other way around
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The above example simulated 223171ms simulation time. However, in wallclock time executing this will literally have taken less than a 1ms. If the event execution's computations would have been very difficult (let's say matrix factorization of a billion x billion matrix) it could have also been the other way around.
+The above example simulated 223171ms simulation time. However, in wallclock time executing
+this will literally have taken less than a 1ms. If the event execution's computations would
+have been very difficult (let's say matrix factorization of a billion x billion matrix) it
+could have also been the other way around.
 
 
-You decide what part of the physical system to model in the simulation
+We decide what part of the physical system to model in the simulation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The duration of executing an event in wallclock time can be arbitrarily long, yet no simulation time will pass. For example, instead of having simple pre-calculated constant travel time values, we could also do a very complicated calculation based on many other variables (traffic, type of car, whatever the physical system is).
+The duration of executing an event in wallclock time can be arbitrarily long, yet no simulation
+time will pass. For example, instead of having simple pre-calculated constant travel time values,
+we could also do a very complicated calculation based on many other variables (traffic, type of car,
+whatever the physical system is).
 
-Moreover, we can even model the time it takes to decide something. For example, we could model that looking up what the next hop is takes 50ms in simulation time. To accomplish this e.g., we can add an extra method ``def forward_lookup_done(self, message, next_hop, travel_duration)`` and  instead schedule that in the ``receive`` and have the extra method schedule the ``receive`` at the next hop.
+Moreover, we can even model the time it takes to decide something. For example, we could model
+that looking up what the next hop is takes 50ms in simulation time. To accomplish this e.g.,
+we can add an extra method ``def forward_lookup_done(self, message, next_hop, travel_duration)``
+and  instead schedule that in the ``receive`` and have the extra method schedule the ``receive``
+at the next hop.
 
 
 Wallclock time ≠ physical time
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The wallclock time is the time it takes to simulate on the computer you are running the simulation on. Generally, this is NOT the physical system you are modeling, and even if it is, the timings can be significantly off as it is only a model (and also, the computer can have other applications running which influence it).
+The wallclock time is the time it takes to simulate on the computer we are running the simulation on.
+Generally, this is NOT the physical system we are modeling, and even if it is, the timings can be
+significantly off as it is only a model. Moreover, there can other external influences that
+affect physical time (e.g., other applications running on the computer).
 
-Using wallclock time to determine simulation time is bad modeling and results in unreproducible experiments and platform dependency
+Using wallclock time to determine simulation time is arguably bad modeling and results in unreproducible
+experiments and platform dependency. A better solution would be to benchmark the target physical system
+separately, and create models that in turn can be used in the simulation.
+
+References
+----------
+
+.. [Fujimoto2000] Fujimoto, Richard M. Parallel and distributed simulation systems. Vol. 300. New York: Wiley, 2000.
