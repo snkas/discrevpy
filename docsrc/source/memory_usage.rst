@@ -65,7 +65,7 @@ It can be verified with the following test script (requires ``python3 -m pip ins
 
     class TestMemory(unittest.TestCase):
 
-        def test_memory_size(self):
+        def test_memory_usage(self):
 
             def x(a, b):
                 pass
@@ -81,4 +81,4 @@ It can be verified with the following test script (requires ``python3 -m pip ins
             simulator.run()
             simulator.reset()
 
-... and then running it using: ``python3 -m pytest -s -k test_memory_size``
+... and then running it using: ``python3 -m pytest -s -k test_memory_usage``

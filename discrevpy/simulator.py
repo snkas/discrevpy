@@ -63,14 +63,14 @@ class Simulator:
         Ready the simulator such that initial events can be scheduled.
         """
 
-        # Simulator must be in initialized state
+        # Simulator must be in INIT state
         if self.__state != Simulator._State.INIT:
             raise ValueError(
                 "Can only become READY when the simulator is INIT "
                 "(current: " + str(self.__state.name) + ")"
             )
 
-        # Proceed to ready state
+        # Proceed to READY state
         self.__state = Simulator._State.READY
 
     def end(self, delay: int = 0) -> None:
@@ -91,7 +91,7 @@ class Simulator:
                          Delay from current simulation time (now) to end the simulation
         """
 
-        # Simulator must be in either ready or running state
+        # Simulator must be in either READY or RUNNING state
         if self.__state != Simulator._State.READY and self.__state != Simulator._State.RUNNING:
             raise ValueError(
                 "Scheduling end can only be done when the state is READY or RUNNING "
@@ -167,8 +167,8 @@ class Simulator:
         Schedule an event in the simulation with a certain priority.
 
         If there are multiple events in one time moment, the priority determines which goes first.
-        The lower the priority, the earlier it is executed in its time moment. If the priority of
-        two events is equal, the final arbitration is on which event was scheduled first.
+        The lower the priority, the earlier it is executed in its time moment. If the priorities of
+        two events are equal, the final arbitration is based on which event was scheduled first.
 
         :param delay:       Delay from current simulation time (now)
         :param priority:    Priority
@@ -177,7 +177,7 @@ class Simulator:
         :param kwargs:      (Optional) Keyword arguments passed to the callback
         """
 
-        # Simulator must be in either ready or running state
+        # Simulator must be in either READY or RUNNING state
         if self.__state != Simulator._State.READY and self.__state != Simulator._State.RUNNING:
             raise ValueError(
                 "Scheduling can only be done when the state is READY or RUNNING "
@@ -221,18 +221,18 @@ class Simulator:
         Run the simulation.
 
         If there is an end time (specified via end()), the simulation will
-        end at that time moment. Else, if there is NO end time specified, the
+        end at that time moment. Else, if there is no end time specified, the
         simulation will run until there are no more events.
         """
 
-        # Simulator must be in ready state
+        # Simulator must be in READY state
         if self.__state != Simulator._State.READY:
             raise ValueError(
                 "Run can only be started when the state is READY "
                 "(current: " + str(self.__state.name) + ")"
             )
 
-        # Now it is running
+        # Now it is in RUNNING state
         self.__state = Simulator._State.RUNNING
 
         # Event loop
@@ -254,11 +254,11 @@ class Simulator:
     def reset(self) -> None:
         """
         Reset the simulator such that it can be run again.
-        This means current time (now) is set to 0, the event heap
-        is emptied and any end time is unset.
+        This results in current time (now) being set to 0, the event heap
+        being emptied and any end time being unset.
         """
 
-        # Simulator must be in finished state
+        # Simulator must be in FINISHED state
         if self.__state != Simulator._State.FINISHED:
             raise ValueError(
                 "Reset can only be performed when the state is FINISHED "
@@ -279,47 +279,47 @@ class Simulator:
         After the simulation is run, it will return the time of the last executed event if there
         was no end time, else it will return the end time.
 
-        :return: Current simulation time (int)
+        :return: Current simulation time
         """
         return self.__now
 
     def is_init(self) -> bool:
         """
-        Check whether the simulator is initialized.
-        When the simulator is INIT, it is NOT possible to schedule events.
+        Check whether the simulator is in INIT state.
+        When the simulator is INIT, it is not possible to schedule events.
         The simulator can be put into READY state by calling ready().
 
-        :return: True iff the simulator is INIT (bool)
+        :return: True iff the simulator is INIT
         """
         return self.__state == Simulator._State.INIT
 
     def is_ready(self) -> bool:
         """
-        Check whether the simulator is ready.
+        Check whether the simulator is in READY state.
         When the simulator is READY, it is possible to schedule events.
         The simulator can be put into RUNNING state by calling run().
 
-        :return: True iff the simulator is READY (bool)
+        :return: True iff the simulator is READY
         """
         return self.__state == Simulator._State.READY
 
     def is_running(self) -> bool:
         """
-        Check whether the simulator is currently running.
+        Check whether the simulator is in RUNNING state.
         When the simulator is RUNNING, it is possible to schedule events.
         After the run ends the simulator becomes FINISHED.
 
-        :return: True iff the simulator is RUNNING (bool)
+        :return: True iff the simulator is RUNNING
         """
         return self.__state == Simulator._State.RUNNING
 
     def is_finished(self) -> bool:
         """
-        Check whether the simulator has been run and is finished.
-        When the simulator is FINISHED, it is NOT possible to schedule events.
+        Check whether the simulator has been run and as such is in FINISHED state.
+        When the simulator is FINISHED, it is not possible to schedule events.
         The simulator can be put into INIT state by calling reset().
 
-        :return: True iff the simulator is FINISHED (bool)
+        :return: True iff the simulator is FINISHED
         """
         return self.__state == Simulator._State.FINISHED
 
@@ -332,7 +332,7 @@ class Simulator:
         the event heap can still have events in it.
         In INIT state, the event heap size is always zero.
 
-        :return: Number of events in the event heap (int)
+        :return: Number of events in the event heap
         """
         return len(self.__event_heap)
 

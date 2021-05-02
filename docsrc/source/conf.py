@@ -7,13 +7,14 @@ sys.path.insert(0, os.path.abspath('./../../discrevpy'))
 project = 'discrevpy'
 copyright = '2021, snkas'
 author = 'snkas'
-release = '1.0.2'
+release = '1.0.3'
 language = 'en'
 
 # General configuration
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
+    'sphinx_autodoc_typehints'
 ]
 exclude_patterns = []
 
@@ -25,7 +26,7 @@ html_sidebars = {
         "sidebar/brand.html",
         "sidebar/search.html",
         "sidebar/navigation.html",
-        "sidebar/scroll-end.html",
+        "sidebar/scroll-end.html"
     ]
 }
 html_extra_path = ['_extra']

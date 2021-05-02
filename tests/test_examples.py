@@ -212,3 +212,41 @@ class TestExamples(unittest.TestCase):
         print(simulator._Simulator__event_heap)
         simulator.run()
         simulator.reset()
+
+    def test_4x100m_relay(self):
+
+        def relay_finished():
+            print("Last athlete finished: 4x100m relay in %.3gs" % (simulator.now() / 1e9))
+
+        class Athlete:
+            def __init__(self, idx, athletes, speed_m_per_s):
+                self.idx = idx
+                self.athletes = athletes
+                self.speed_m_per_s = speed_m_per_s
+
+            def receive_stick_and_run(self):
+                print("Athlete %d receives stick and starts run at t=%.3gs" % (self.idx, simulator.now() / 1e9))
+                if self.idx != len(self.athletes) - 1:
+                    simulator.schedule(
+                        int(100.0 / self.speed_m_per_s * 1e9),
+                        self.athletes[self.idx + 1].receive_stick_and_run
+                    )
+                else:
+                    simulator.schedule(
+                        int(100.0 / self.speed_m_per_s * 1e9),
+                        relay_finished
+                    )
+
+        athletes = []
+        athletes.append(Athlete(0, athletes, 10.2))  # Nesta Carter
+        athletes.append(Athlete(1, athletes, 10.1))  # Michael Frater
+        athletes.append(Athlete(2, athletes, 10.3))  # Yohan Blake
+        athletes.append(Athlete(3, athletes, 10.4))  # Usain Bolt
+        # All Athlete instances will now have a complete athletes list
+        # because Python objects are passed by reference
+
+        simulator.ready()
+        simulator.schedule(0, athletes[0].receive_stick_and_run)
+        print("Simulating a 4x100m relay")
+        simulator.run()
+        simulator.reset()

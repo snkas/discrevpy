@@ -25,13 +25,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install python3-pip
 
-      - name: Install Python module dependencies
+      - name: Install Python module development requirements
         run: |
-          python3 -m pip install pytest
-          python3 -m pip install coverage
-          python3 -m pip install pylint
-          python3 -m pip install sphinx
-          python3 -m pip install furo
+          python3 -m pip install pytest coverage pylint sphinx sphinx-autodoc-typehints furo
 
       - name: Pylint
         run: |
