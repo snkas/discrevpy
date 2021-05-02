@@ -14,6 +14,7 @@ language = 'en'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
+    'sphinx_autodoc_typehints'
 ]
 exclude_patterns = []
 
@@ -25,7 +26,7 @@ html_sidebars = {
         "sidebar/brand.html",
         "sidebar/search.html",
         "sidebar/navigation.html",
-        "sidebar/scroll-end.html",
+        "sidebar/scroll-end.html"
     ]
 }
 html_extra_path = ['_extra']

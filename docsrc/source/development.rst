@@ -6,7 +6,7 @@ Requirements
 
 .. code-block:: text
 
-    python3 -m pip install pytest coverage pylint sphinx furo
+    python3 -m pip install pytest coverage pylint sphinx sphinx-autodoc-typehints furo
 
 
 Install latest development version

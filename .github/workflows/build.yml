@@ -27,7 +27,7 @@ jobs:
 
       - name: Install Python module development requirements
         run: |
-          python3 -m pip install pytest coverage pylint sphinx furo
+          python3 -m pip install pytest coverage pylint sphinx sphinx-autodoc-typehints furo
 
       - name: Pylint
         run: |
