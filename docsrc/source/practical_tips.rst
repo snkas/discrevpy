@@ -1,46 +1,79 @@
 Practical tips
 ==============
 
-Event execution is generally the bottleneck: keep it O(1) or O(log n)
------------------------------------------------------------------------
+Speed up event execution: the most likely bottleneck
+----------------------------------------------------
 
-Generally, insertion of new events into the event queue is not the bottleneck. Rather the time it takes to execute the events is the more likely dominant time factor. In an event execution, you can of course do any computation you want. This almost always consists of events modifying state, which consists of data structures whose functions have time complexity (e.g., memory allocation, queue insertion, passing of events).
+Generally, insertion of new events into the event queue is not the bottleneck.
+Rather the time it takes to execute the events is the more likely dominant time factor.
+In an event execution, any arbitrary computation can be done. However, although
+simulation time does not progress within the event's execution, wallclock time does
+-- which in the end we use to ascribe a simulation "being slow". As such, any
+algorithm or data structure interaction performed in an event execution should
+have its time complexity thoughtfully considered.
 
-An event type with a slow runtime which is often inserted/executed can slow down your simulation significantly. E.g., if you have the arrival of packets into a queue of 100000 elements, make sure the queue insertion is O(1) or O(log n) at worse. Discrete-event simulation is not magic, it is only the simulation of time.
+* **Strive for O(1) or O(log n) time complexity**
 
-However: also do not fill up the event queue unnecessarily
-----------------------------------------------------------
+  An event type with a slow runtime (especially if frequently inserted/executed) can
+  slow down a simulation significantly. For instance, if there is an arrival
+  of packets into a queue of 100000 elements, it is prudent that the queue insertion
+  is O(1) or O(log n) at worse.  Similarly, allocating or deallocating large amounts
+  of memory can be time consuming. Discrete event simulation is not magic, it is
+  merely the simulation of time.
 
-Of course, insert events only if it is absolutely necessary. If you blow up your event queue to 1'000'000+ events, the O(log n) insertion for each new event is still going to slow you down.
+* **Pre-process/pre-calculate as much as possible**
 
-**The following guidelines should be followed:**
+  If there are values which can be calculated beforehand which are independent of the
+  simulation outcome itself, it is often worthwhile to separately generate these
+  and load them in at the start of each run. For example, if the simulation involves
+  shortest path routing over a graph, one can calculate the routing state in advance
+  (e.g., using Floyd-Warshall). Depending on the task, the pre-calculation might possibly be
+  parallelizable over many machines, or could be done with a more convenient framework
+  or programming language (with e.g., better libraries available or hardware acceleration).
 
-Do not pre-plan all events of a process which is regenerative
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Example: let's say every 10ms you want to send a message from A to B. Don't insert for the entire duration of the simulation (e.g., 100s) all events (e.g., 10000) but instead insert one, which then at the end of its execution inserts the next one 10ms from then.
+Regulate event queue size
+-------------------------
 
-Be wary of inserting a far-in-the-future event for a thing which occurs often
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Insertion into the event queue is O(log n), and as such is likely not the bottleneck.
+Of course, if the event queue becomes increasingly large, e.g., reaching 1'000'000 or more events,
+it can become a substantial overhead. Irrespective of whether it is event execution or event insertion
+which is the dominant time factor, the key mantra is the same: **only insert events if it is necessary.**
 
-If you insert 100'000 events, each of which is scheduled for 1 ms then they only interfere for that 1 ms. If they are schedule for 1000 s, then they increase event insertion duration for the simulation of those whole thousand seconds.
+* **Do not pre-plan all events of a process which is regenerative**
 
-Group events if the model accuracy loss is acceptable
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  For instance, suppose every 1ms a message from A to B is sent. Don't insert for the entire
+  duration of the simulation (e.g., 100s) all events (e.g., 100'000) but instead insert one, which
+  at the end of its execution inserts the next one 1ms in the future.
 
-It might be that many events actually happen at slightly different times, but that with some loss of model accuracy, you can group them. You do this by maintaining a list of the things that happened in that time interval, and then having a regenerative event in a time interval (e.g., 10ms) which goes over the list. It's like the efficiency of garbage collection in Java (process in batches).
+* **Be wary of inserting many far-in-the-future events**
 
-If you can, leave it to post-processing
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  For example, if there are 200'000 events occurring at t=100s, and they are scheduled at the start of the
+  simulation, then for the entire simulation time interval of [0, 100s), insertion into the event queue will be slow.
+  If it is possible, one could group these 200'000 events together by scheduling a single event at t=99s which only
+  at that moment schedules the 200'000 events.
 
-You can always save things in state and then later on process them. This is especially true for collection of logs or statistics: don't for each thing you log something for insert an event at the end of the simulation which processes the logs, but instead keep it in state and save a list of the things. Then in post-processing after the simulation go over the list.
+* **Group or aggregate events if the model accuracy loss (if any) is acceptable**
 
-Be careful of events generating events spiraling out of control
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  It might be too time consuming to update the state at the finest time granularity desirable.
+  At the cost of model accuracy, one can instead operate at coarser time granularity, possibly
+  grouping together or aggregating the changes that occurred. For example, one can have
+  a regenerative event in a simulation time interval (e.g., 10ms) that applies the changes in batch.
 
-Events creating other events is the key concept of discrete event simulation. However, be aware that this does not spiral out of control, don't insert insert new events continuously at a small future time scale. This can event accidentally: zero is a valid future time, indicating it needs to be execute in the same time step as the event being executed right now. An integer division of int a = 10 / 100 will round to a = 0. Discrete event simulation also happens at fixed time granularity, so even if you set an event to 0.3 nanoseconds in the future, if the granularity is 1 nanosecond, the event will either be 0 or 1 ns in the future.
+* **Leave as much as possible to post-processing**
 
-Pre-process/pre-calculate as much as possible
----------------------------------------------
+  One can always save data in memory and after the simulation is run process them. This is especially true for the
+  collection of logs or statistics. In post-processing, one can go over the stored data in a manner more efficient
+  (e.g., parallelized over many machines) or convenient (e.g., using another framework or programming language).
 
-If you have values which you can calculate beforehand which remain the same for each experimental run, it might be worthwhile to pre-calculate these, and then read in the pre-calculated values from file at the start of each run. Depending on the task, the pre-calculation you might want to do on many machines or in a more convenient programming language (with e.g., better libraries available or hardware acceleration).
+* **Be careful of events generating events spiraling out of control**
+
+  Events creating other events is a key concept of discrete event simulation. However, be aware that
+  this does not spiral out of control: it is not recommended to insert new events continuously at a very
+  small future time scale. This can even occur accidentally: zero is a valid future time, indicating
+  it needs to be execute in the same time step as the event being executed right now. One might use
+  an integer division (e.g., ``d = 10 // 100``) (or floor operation) to calculate delay, which will round down to zero
+  -- thus if it always schedules itself again in the future this can lead to an infinite loop as
+  simulation time never progresses. Discrete event simulation time has a fixed time granularity (known in advance):
+  if the granularity is 1 nanosecond then it is impossible to schedule an event 0.3 nanoseconds in the future:
+  it must be either 0 or 1 ns.
